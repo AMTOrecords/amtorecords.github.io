@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -15,63 +14,60 @@
       overflow-x: hidden;
     }
 
+    /* BLURRED BACKGROUND (APPLE STYLE) */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url('New Project.jpg') center/cover no-repeat;
+      filter: blur(40px) brightness(0.4);
+      z-index: -1;
+      transform: scale(1.1);
+    }
+
     /* HERO */
     .hero {
-      position: relative;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      align-items: flex-end;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
       padding: 40px 20px;
-    }
-
-    .hero img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.8);
-    }
-
-    /* 🔥 WHITE EDGE GLOW */
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at center,
-          rgba(255,255,255,0.08) 0%,
-          rgba(0,0,0,0.0) 45%),
-        linear-gradient(to top,
-          rgba(0,0,0,0.95),
-          rgba(0,0,0,0.2));
-    }
-
-    .hero-text {
-      position: relative;
-      z-index: 2;
       text-align: center;
-      animation: fadeIn 1.5s ease;
+    }
+
+    .cover {
+      width: 85%;
+      max-width: 420px;
+      border-radius: 18px;
+
+      /* WHITE EDGE + GLOW */
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.08),
+        0 0 60px rgba(255,255,255,0.25),
+        0 30px 80px rgba(0,0,0,0.9);
+
+      animation: fadeUp 1.2s ease;
     }
 
     h1 {
-      font-size: 42px;
-      margin: 0 0 10px;
+      margin-top: 25px;
+      font-size: 38px;
       letter-spacing: 1px;
+      animation: fadeUp 1.5s ease;
     }
 
     .subtitle {
       opacity: 0.7;
+      margin-top: 10px;
       font-size: 15px;
     }
 
     /* SECTION */
     .section {
       padding: 60px 20px;
-      max-width: 700px;
+      max-width: 600px;
       margin: auto;
       text-align: center;
-      animation: fadeUp 1s ease;
     }
 
     iframe {
@@ -83,7 +79,7 @@
     .note {
       margin-top: 30px;
       line-height: 1.7;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .back {
@@ -99,15 +95,16 @@
       opacity: 1;
     }
 
-    /* ANIMATIONS */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    /* ANIMATION */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
   </style>
@@ -115,14 +112,15 @@
 
 <body>
 
+  <!-- BLURRED BACKGROUND -->
+  <div class="bg"></div>
+
   <!-- HERO -->
   <div class="hero">
-    <img src="New Project.jpg">
+    <img class="cover" src="New Project.jpg">
 
-    <div class="hero-text">
-      <h1>Love You, Bye.</h1>
-      <div class="subtitle">Um projeto feito de memória e presença</div>
-    </div>
+    <h1>Love You, Bye.</h1>
+    <div class="subtitle">Um projeto feito de memória e presença</div>
   </div>
 
   <!-- CONTENT -->
@@ -131,8 +129,9 @@
     <h2>Ouvir</h2>
 
     <iframe 
-      src="https://open.spotify.com/embed/album/1YrS9PMgvEPWKwztOWW7sJ" 
-      height="352" frameborder="0"
+      src="https://open.spotify.com/embed/album/1YrS9PMgvEPWKwztOWW7sJ"
+      height="352"
+      frameborder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
     </iframe>
 
