@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Love You, Bye — AMTO Records</title>
 
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: Arial, sans-serif;
       background: black;
       color: white;
       overflow-x: hidden;
+      text-align: center;
     }
 
-    /* BLURRED BACKGROUND (APPLE STYLE) */
     .bg {
       position: fixed;
       inset: 0;
-      background: url('New Project.jpg') center/cover no-repeat;
-      filter: blur(40px) brightness(0.4);
+      background: url('/love-you-bye-cover.jpg') center/cover no-repeat;
+      filter: blur(40px) brightness(0.38);
       z-index: -1;
       transform: scale(1.1);
     }
 
-    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -35,6 +34,88 @@
       text-align: center;
     }
 
+    .cover {
+      width: 85%;
+      max-width: 420px;
+      border-radius: 18px;
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.08),
+        0 0 60px rgba(255,255,255,0.25),
+        0 30px 80px rgba(0,0,0,0.9);
+    }
+
+    h1 {
+      margin-top: 25px;
+      font-size: 38px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      opacity: 0.75;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    .section {
+      padding: 60px 20px 80px;
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    iframe {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .note {
+      margin-top: 30px;
+      line-height: 1.7;
+      opacity: 0.85;
+      font-size: 15px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 40px;
+      opacity: 0.6;
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg"></div>
+
+  <div class="hero">
+    <img class="cover" src="/love-you-bye-cover.jpg" alt="Love You Bye cover">
+    <h1>Love You, Bye.</h1>
+    <div class="subtitle">Um projeto feito de memória e presença</div>
+  </div>
+
+  <div class="section">
+    <h2>Ouvir</h2>
+
+    <iframe
+      src="https://open.spotify.com/embed/album/1YrS9PMgvEPWKwztOWW7sJ"
+      height="352"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+
+    <div class="note">
+      Um espaço onde a música se torna uma forma de continuar a falar
+      com quem nunca deixou verdadeiramente de estar.
+    </div>
+
+    <a href="/index.html" class="back">← Voltar</a>
+  </div>
+
+</body>
+</html>
     .cover {
       width: 85%;
       max-width: 420px;
