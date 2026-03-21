@@ -7,14 +7,15 @@
 
   <style>
     :root {
-      --icon-size: 28px;
-      --icon-gap: 24px;
-      --icon-padding-y: 14px;
-      --icon-padding-x: 18px;
-      --glass-bg: rgba(0, 0, 0, 0.28);
-      --glass-border: rgba(255, 255, 255, 0.14);
-      --icon-color: rgba(255, 255, 255, 0.92);
-      --icon-color-dim: rgba(255, 255, 255, 0.72);
+      --bg: #000000;
+      --card: #0f0f10;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.68);
+      --border: rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.18);
+      --glass: rgba(0,0,0,0.28);
+      --shadow: 0 18px 45px rgba(0,0,0,0.30);
+      --radius: 22px;
     }
 
     * {
@@ -22,29 +23,32 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html, body {
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       margin: 0;
-      padding: 0;
-      width: 100%;
-      background: #000;
-      color: white;
+      background: var(--bg);
+      color: var(--text);
       font-family: Arial, sans-serif;
       overflow-x: hidden;
     }
 
-    body {
-      position: relative;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .stage {
+    .hero {
       position: relative;
-      width: 100%;
       height: 100vh;
-      background: #000;
+      width: 100%;
       overflow: hidden;
+      background: #000;
     }
 
-    .bg-video {
+    .hero video {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -52,195 +56,166 @@
       object-fit: contain;
       background: #000;
       opacity: 0;
-      animation: videoFade 1.2s ease forwards;
+      animation: heroFade 1.2s ease forwards;
     }
 
-    .top-fade {
+    .hero::before {
+      content: "";
       position: absolute;
       inset: 0;
       background:
         linear-gradient(to bottom,
-          rgba(0,0,0,0.38) 0%,
-          rgba(0,0,0,0.12) 18%,
-          rgba(0,0,0,0.00) 40%,
-          rgba(0,0,0,0.00) 60%,
-          rgba(0,0,0,0.14) 82%,
-          rgba(0,0,0,0.42) 100%);
+          rgba(0,0,0,0.36) 0%,
+          rgba(0,0,0,0.10) 30%,
+          rgba(0,0,0,0.08) 70%,
+          rgba(0,0,0,0.40) 100%);
       pointer-events: none;
       z-index: 1;
-      opacity: 0;
-      animation: overlayFade 1.4s ease forwards;
     }
 
-    .vignette {
+    .hero::after {
+      content: "";
       position: absolute;
       inset: 0;
       background:
         radial-gradient(circle at center,
           rgba(0,0,0,0) 48%,
-          rgba(0,0,0,0.10) 68%,
-          rgba(0,0,0,0.24) 100%);
+          rgba(0,0,0,0.10) 72%,
+          rgba(0,0,0,0.22) 100%);
       pointer-events: none;
       z-index: 1;
-      opacity: 0;
-      animation: overlayFade 1.6s ease forwards;
     }
 
-    .lang-toggle {
+    .top-bar {
       position: absolute;
       top: 18px;
       right: 18px;
-      z-index: 4;
-      border: 1px solid rgba(255,255,255,0.16);
+      z-index: 3;
+      opacity: 0;
+      animation: floatIn 0.9s ease forwards;
+      animation-delay: 0.7s;
+    }
+
+    .lang-toggle {
+      border: 1px solid rgba(255,255,255,0.14);
       background: rgba(0,0,0,0.28);
       color: white;
       padding: 10px 14px;
       border-radius: 999px;
       font-size: 13px;
-      letter-spacing: 0.5px;
-      cursor: pointer;
+      letter-spacing: 0.4px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
     }
 
-    .icons-wrap {
+    .social-wrap {
       position: absolute;
       left: 50%;
       bottom: 22px;
       transform: translateX(-50%);
       z-index: 3;
       opacity: 0;
-      animation: iconsFade 1.2s ease forwards;
-      animation-delay: 1s;
-      width: max-content;
+      animation: floatIn 1s ease forwards;
+      animation-delay: 0.95s;
       max-width: calc(100vw - 24px);
     }
 
-    .icons {
+    .socials {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: var(--icon-gap);
-      padding: var(--icon-padding-y) var(--icon-padding-x);
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
+      gap: 22px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.24);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border-radius: 999px;
-      box-shadow:
-        0 10px 30px rgba(0,0,0,0.22),
-        inset 0 1px 0 rgba(255,255,255,0.05);
     }
 
-    .icons a {
-      width: var(--icon-size);
-      height: var(--icon-size);
+    .socials a {
+      width: 25px;
+      height: 25px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--icon-color-dim);
-      text-decoration: none;
-      transition: transform 0.22s ease, opacity 0.22s ease, color 0.22s ease, filter 0.22s ease;
-      cursor: pointer;
+      color: rgba(255,255,255,0.78);
+      transition: transform 0.22s ease, color 0.22s ease, filter 0.22s ease;
     }
 
-    .icons a:hover,
-    .icons a:focus-visible,
-    .icons a:active {
-      transform: translateY(-1px) scale(1.08);
-      color: var(--icon-color);
-      filter: drop-shadow(0 0 10px rgba(255,255,255,0.16));
+    .socials a:hover,
+    .socials a:active,
+    .socials a:focus-visible {
+      color: #fff;
+      transform: translateY(-1px) scale(1.10);
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.16));
       outline: none;
     }
 
-    .icons svg {
+    .socials svg {
       width: 100%;
       height: 100%;
       fill: currentColor;
       display: block;
     }
 
-    .releases {
-      padding: 80px 20px 100px;
-      max-width: 1100px;
+    .content {
+      max-width: 1160px;
       margin: 0 auto;
+      padding: 84px 20px 110px;
     }
 
-    .section-title {
+    .section-head {
       text-align: center;
-      margin: 0 0 34px;
-      font-size: 30px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+      margin-bottom: 38px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
+
+    .section-head.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 31px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+    }
+
+    .section-head p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pt { display: inline; }
+    .en { display: none; }
 
     .release-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
       gap: 30px;
     }
 
     .release-card {
       display: block;
-      background: #111;
-      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       overflow: hidden;
-      text-decoration: none;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      box-shadow: var(--shadow);
       opacity: 0;
-      transform: translateY(30px);
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-    }
-
-    .release-card:hover,
-    .release-card:active {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.34);
-      border-color: rgba(255,255,255,0.16);
-    }
-
-    .release-card img {
-      width: 100%;
-      display: block;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-    }
-
-    .release-card h3 {
-      margin: 18px 18px 8px;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    .release-card p {
-      margin: 0 18px 20px;
-      color: rgba(255,255,255,0.68);
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .release-card.coming {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 360px;
-      border: 1px dashed rgba(255,255,255,0.15);
-      background: linear-gradient(rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      transition: transform 0.35s ease, border-color 0.35s ease;
-    }
-
-    .coming-inner {
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .coming-inner p {
-      margin: 0;
-      font-size: 20px;
-      letter-spacing: 1px;
-      opacity: 0.58;
+      transform: translateY(34px);
+      transition:
+        transform 0.38s ease,
+        box-shadow 0.38s ease,
+        border-color 0.38s ease,
+        opacity 0.38s ease;
     }
 
     .release-card.show {
@@ -248,20 +223,97 @@
       transform: translateY(0);
     }
 
-    .pt { display: inline; }
-    .en { display: none; }
-
-    @keyframes videoFade {
-      from { opacity: 0; transform: scale(1.015); }
-      to { opacity: 1; transform: scale(1); }
+    .release-card:hover,
+    .release-card:active {
+      transform: translateY(-6px);
+      border-color: var(--border-strong);
+      box-shadow: 0 24px 55px rgba(0,0,0,0.34);
     }
 
-    @keyframes overlayFade {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .release-image {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: #0a0a0a;
     }
 
-    @keyframes iconsFade {
+    .release-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .release-card:hover .release-image img,
+    .release-card:active .release-image img {
+      transform: scale(1.04);
+    }
+
+    .release-info {
+      padding: 18px 18px 20px;
+    }
+
+    .release-info h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .release-info p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .coming {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 395px;
+      border: 1px dashed rgba(255,255,255,0.16);
+      background:
+        linear-gradient(180deg,
+          rgba(255,255,255,0.03),
+          rgba(255,255,255,0.01));
+    }
+
+    .coming-inner {
+      text-align: center;
+      padding: 60px 22px;
+    }
+
+    .coming-inner h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 500;
+      opacity: 0.92;
+    }
+
+    .coming-inner p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .footer-space {
+      height: 20px;
+    }
+
+    @keyframes heroFade {
+      from {
+        opacity: 0;
+        transform: scale(1.012);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes floatIn {
       from {
         opacity: 0;
         transform: translateX(-50%) translateY(10px);
@@ -272,56 +324,59 @@
       }
     }
 
-    @media (max-width: 700px) {
-      :root {
-        --icon-size: 26px;
-        --icon-gap: 20px;
-        --icon-padding-y: 12px;
-        --icon-padding-x: 16px;
-      }
-
-      .icons-wrap {
+    @media (max-width: 720px) {
+      .social-wrap {
         bottom: 18px;
       }
 
-      .lang-toggle {
+      .socials {
+        gap: 18px;
+        padding: 12px 15px;
+      }
+
+      .socials a {
+        width: 23px;
+        height: 23px;
+      }
+
+      .top-bar {
         top: 14px;
         right: 14px;
+      }
+
+      .content {
+        padding-top: 72px;
+      }
+
+      .section-head h2 {
+        font-size: 27px;
       }
     }
 
     @media (max-width: 420px) {
-      :root {
-        --icon-size: 24px;
-        --icon-gap: 18px;
-        --icon-padding-y: 11px;
-        --icon-padding-x: 14px;
+      .release-grid {
+        gap: 24px;
       }
 
-      .icons-wrap {
-        bottom: 16px;
-      }
-
-      .section-title {
-        font-size: 26px;
+      .release-info h3 {
+        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <section class="stage">
-    <video class="bg-video" autoplay muted loop playsinline preload="auto">
-      <source src="lv_0_20260320192328.mp4" type="video/mp4" />
+  <section class="hero">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="lv_0_20260320192328.mp4" type="video/mp4">
     </video>
 
-    <div class="top-fade"></div>
-    <div class="vignette"></div>
+    <div class="top-bar">
+      <button class="lang-toggle" onclick="toggleLang()">PT / EN</button>
+    </div>
 
-    <button class="lang-toggle" onclick="toggleLang()">PT / EN</button>
-
-    <div class="icons-wrap">
-      <div class="icons">
+    <div class="social-wrap">
+      <div class="socials">
         <a href="https://open.spotify.com/album/1YrS9PMgvEPWKwztOWW7sJ?si=0hwpfQWkQeqUhxPufRXwsQ" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
           <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.52 17.34c-.22.36-.68.48-1.04.26-2.86-1.75-6.47-2.15-10.75-1.18-.41.09-.82-.16-.91-.57-.09-.41.16-.82.57-.91 4.64-1.05 8.61-.6 11.87 1.33.36.22.48.68.26 1.07zm1.49-3.31c-.27.43-.84.57-1.27.3-3.27-2.01-8.26-2.59-12.13-1.4-.48.14-.98-.13-1.12-.61-.14-.48.13-.98.61-1.12 4.31-1.3 9.86-.67 13.62 1.62.43.27.57.84.29 1.21zm.13-3.45C15.7 8.6 8.69 8.4 5.56 9.36c-.57.17-1.18-.15-1.35-.72-.17-.57.15-1.18.72-1.35 3.58-1.09 11.34-.87 15.48 1.49.52.3.7.96.4 1.48-.29.51-.96.7-1.47.4z"/></svg>
         </a>
@@ -341,77 +396,99 @@
     </div>
   </section>
 
-  <section class="releases">
-    <h2 class="section-title">
-      <span class="pt">Lançamentos</span>
-      <span class="en">Releases</span>
-    </h2>
+  <main class="content">
+    <div class="section-head" id="section-head">
+      <h2>
+        <span class="pt">Lançamentos</span>
+        <span class="en">Releases</span>
+      </h2>
+      <p>
+        <span class="pt">Música, memória e tudo aquilo que permanece.</span>
+        <span class="en">Music, memory, and everything that remains.</span>
+      </p>
+    </div>
 
-    <div class="release-grid">
-
+    <section class="release-grid">
       <a class="release-card" href="ficamos-por-ir.html">
-        <img src="ficamos-por-ir.jpg" alt="Ficámos por Ir cover">
-        <h3>
-          <span class="pt">Ficámos por Ir</span>
-          <span class="en">Ficámos por Ir</span>
-        </h3>
-        <p>
-          <span class="pt">Lugares, promessas e silêncios que ficaram por viver.</span>
-          <span class="en">Places, promises and silences left unlived.</span>
-        </p>
+        <div class="release-image">
+          <img src="file_00000000e8f07243b3f85a1e65e417b4.png" alt="Ficámos por Ir cover">
+        </div>
+        <div class="release-info">
+          <h3>
+            <span class="pt">Ficámos por Ir</span>
+            <span class="en">Ficámos por Ir</span>
+          </h3>
+          <p>
+            <span class="pt">Lugares, promessas e silêncios que ficaram por viver.</span>
+            <span class="en">Places, promises and silences left unlived.</span>
+          </p>
+        </div>
       </a>
 
       <a class="release-card" href="no-teu-dia.html">
-        <img src="no-teu-dia.jpg" alt="No Teu Dia cover">
-        <h3>
-          <span class="pt">No Teu Dia</span>
-          <span class="en">On Your Day</span>
-        </h3>
-        <p>
-          <span class="pt">Uma memória acesa no tempo, com o mar sempre por perto.</span>
-          <span class="en">A memory held in time, with the sea always close by.</span>
-        </p>
+        <div class="release-image">
+          <img src="file_0000000082a87243b8245e01f8f724a4.png" alt="No Teu Dia cover">
+        </div>
+        <div class="release-info">
+          <h3>
+            <span class="pt">No Teu Dia</span>
+            <span class="en">On Your Day</span>
+          </h3>
+          <p>
+            <span class="pt">Memória, presença e aquilo que nunca se perde.</span>
+            <span class="en">Memory, presence, and what is never lost.</span>
+          </p>
+        </div>
       </a>
 
       <a class="release-card" href="79-dias.html">
-        <img src="79-dias.jpg" alt="79 Dias cover">
-        <h3>
-          <span class="pt">79 Dias</span>
-          <span class="en">79 Days</span>
-        </h3>
-        <p>
-          <span class="pt">O tempo passa, mas há ausências que continuam a falar connosco.</span>
-          <span class="en">Time passes, but some absences keep speaking to us.</span>
-        </p>
+        <div class="release-image">
+          <img src="New Project.jpg" alt="79 Dias cover">
+        </div>
+        <div class="release-info">
+          <h3>
+            <span class="pt">79 Dias</span>
+            <span class="en">79 Days</span>
+          </h3>
+          <p>
+            <span class="pt">O tempo passa… mas não leva tudo.</span>
+            <span class="en">Time passes… but it does not take everything.</span>
+          </p>
+        </div>
       </a>
 
       <div class="release-card coming">
         <div class="coming-inner">
-          <p>
+          <h3>
             <span class="pt">Ainda por dizer</span>
             <span class="en">Still to be said</span>
+          </h3>
+          <p>
+            <span class="pt">O que vier a seguir também terá o seu lugar.</span>
+            <span class="en">What comes next will have its place too.</span>
           </p>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <div class="footer-space"></div>
+  </main>
 
   <script>
-    const cards = document.querySelectorAll('.release-card');
+    const revealItems = document.querySelectorAll('.release-card, .section-head');
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          const delay = entry.target.classList.contains('coming') ? 900 : index * 180;
+          const delay = entry.target.classList.contains('coming') ? 900 : index * 140;
           setTimeout(() => {
             entry.target.classList.add('show');
           }, delay);
         }
       });
-    }, { threshold: 0.18 });
+    }, { threshold: 0.16 });
 
-    cards.forEach(card => observer.observe(card));
+    revealItems.forEach(item => observer.observe(item));
 
     let currentLang = "pt";
 
