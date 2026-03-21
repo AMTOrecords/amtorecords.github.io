@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,20 +26,20 @@
       margin: 0;
       padding: 0;
       width: 100%;
-      height: 100%;
-      overflow: hidden;
       background: #000;
+      color: white;
       font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
 
     body {
       position: relative;
-      color: white;
     }
 
     .stage {
-      position: fixed;
-      inset: 0;
+      position: relative;
+      width: 100%;
+      height: 100vh;
       background: #000;
       overflow: hidden;
     }
@@ -86,8 +86,25 @@
       animation: overlayFade 1.6s ease forwards;
     }
 
+    .lang-toggle {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 4;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.28);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
     .icons-wrap {
-      position: fixed;
+      position: absolute;
       left: 50%;
       bottom: 22px;
       transform: translateX(-50%);
@@ -123,11 +140,7 @@
       justify-content: center;
       color: var(--icon-color-dim);
       text-decoration: none;
-      transition:
-        transform 0.22s ease,
-        opacity 0.22s ease,
-        color 0.22s ease,
-        filter 0.22s ease;
+      transition: transform 0.22s ease, opacity 0.22s ease, color 0.22s ease, filter 0.22s ease;
       cursor: pointer;
     }
 
@@ -147,14 +160,105 @@
       display: block;
     }
 
+    .releases {
+      padding: 80px 20px 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 0 0 34px;
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .release-card {
+      display: block;
+      background: #111;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .release-card:hover,
+    .release-card:active {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.34);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .release-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .release-card h3 {
+      margin: 18px 18px 8px;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .release-card p {
+      margin: 0 18px 20px;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .release-card.coming {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 360px;
+      border: 1px dashed rgba(255,255,255,0.15);
+      background: linear-gradient(rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      transition: transform 0.35s ease, border-color 0.35s ease;
+    }
+
+    .coming-inner {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .coming-inner p {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 1px;
+      opacity: 0.58;
+    }
+
+    .release-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pt { display: inline; }
+    .en { display: none; }
+
     @keyframes videoFade {
       from { opacity: 0; transform: scale(1.015); }
-      to   { opacity: 1; transform: scale(1); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     @keyframes overlayFade {
       from { opacity: 0; }
-      to   { opacity: 1; }
+      to { opacity: 1; }
     }
 
     @keyframes iconsFade {
@@ -179,6 +283,11 @@
       .icons-wrap {
         bottom: 18px;
       }
+
+      .lang-toggle {
+        top: 14px;
+        right: 14px;
+      }
     }
 
     @media (max-width: 420px) {
@@ -192,47 +301,132 @@
       .icons-wrap {
         bottom: 16px;
       }
+
+      .section-title {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="stage">
+  <section class="stage">
     <video class="bg-video" autoplay muted loop playsinline preload="auto">
       <source src="lv_0_20260320192328.mp4" type="video/mp4" />
     </video>
 
     <div class="top-fade"></div>
     <div class="vignette"></div>
-  </div>
 
-  <div class="icons-wrap">
-    <div class="icons">
-      <a href="https://open.spotify.com/album/1YrS9PMgvEPWKwztOWW7sJ?si=0hwpfQWkQeqUhxPufRXwsQ" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.52 17.34c-.22.36-.68.48-1.04.26-2.86-1.75-6.47-2.15-10.75-1.18-.41.09-.82-.16-.91-.57-.09-.41.16-.82.57-.91 4.64-1.05 8.61-.6 11.87 1.33.36.22.48.68.26 1.07zm1.49-3.31c-.27.43-.84.57-1.27.3-3.27-2.01-8.26-2.59-12.13-1.4-.48.14-.98-.13-1.12-.61-.14-.48.13-.98.61-1.12 4.31-1.3 9.86-.67 13.62 1.62.43.27.57.84.29 1.21zm.13-3.45C15.7 8.6 8.69 8.4 5.56 9.36c-.57.17-1.18-.15-1.35-.72-.17-.57.15-1.18.72-1.35 3.58-1.09 11.34-.87 15.48 1.49.52.3.7.96.4 1.48-.29.51-.96.7-1.47.4z"/>
-        </svg>
-      </a>
+    <button class="lang-toggle" onclick="toggleLang()">PT / EN</button>
 
-      <a href="https://www.instagram.com/amtorecords?igsh=dmExZm5xZW4wb3M4" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7.75 2h8.5C19.66 2 22 4.34 22 7.75v8.5C22 19.66 19.66 22 16.25 22h-8.5C4.34 22 2 19.66 2 16.25v-8.5C2 4.34 4.34 2 7.75 2zm0 2C5.68 4 4 5.68 4 7.75v8.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 3.75-3.75v-8.5C20 5.68 18.32 4 16.25 4h-8.5zm8.75 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
-        </svg>
-      </a>
+    <div class="icons-wrap">
+      <div class="icons">
+        <a href="https://open.spotify.com/album/1YrS9PMgvEPWKwztOWW7sJ?si=0hwpfQWkQeqUhxPufRXwsQ" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.52 17.34c-.22.36-.68.48-1.04.26-2.86-1.75-6.47-2.15-10.75-1.18-.41.09-.82-.16-.91-.57-.09-.41.16-.82.57-.91 4.64-1.05 8.61-.6 11.87 1.33.36.22.48.68.26 1.07zm1.49-3.31c-.27.43-.84.57-1.27.3-3.27-2.01-8.26-2.59-12.13-1.4-.48.14-.98-.13-1.12-.61-.14-.48.13-.98.61-1.12 4.31-1.3 9.86-.67 13.62 1.62.43.27.57.84.29 1.21zm.13-3.45C15.7 8.6 8.69 8.4 5.56 9.36c-.57.17-1.18-.15-1.35-.72-.17-.57.15-1.18.72-1.35 3.58-1.09 11.34-.87 15.48 1.49.52.3.7.96.4 1.48-.29.51-.96.7-1.47.4z"/></svg>
+        </a>
 
-      <a href="https://www.tiktok.com/@amtorecords?_r=1&_t=ZN-94sRv4yaOSE" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12.75 2h2.5c.25 2.12 1.84 3.84 3.95 4.13v2.52c-1.53-.05-2.99-.5-4.25-1.28v6.94c0 3.86-3.14 7-7 7s-7-3.14-7-7 3.14-7 7-7c.33 0 .65.02.97.07v2.55c-.31-.07-.63-.1-.97-.1-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5 4.5-2.02 4.5-4.5V2z"/>
-        </svg>
-      </a>
+        <a href="https://www.instagram.com/amtorecords?igsh=dmExZm5xZW4wb3M4" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5C19.66 2 22 4.34 22 7.75v8.5C22 19.66 19.66 22 16.25 22h-8.5C4.34 22 2 19.66 2 16.25v-8.5C2 4.34 4.34 2 7.75 2zm0 2C5.68 4 4 5.68 4 7.75v8.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 3.75-3.75v-8.5C20 5.68 18.32 4 16.25 4h-8.5zm8.75 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+        </a>
 
-      <a href="https://www.facebook.com/share/18KivqoEUK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M22 12a10 10 0 10-11.5 9.87v-6.99h-2.7V12h2.7V9.8c0-2.67 1.6-4.14 4.05-4.14 1.17 0 2.4.21 2.4.21v2.64h-1.35c-1.33 0-1.75.83-1.75 1.68V12h2.98l-.48 2.88h-2.5v6.99A10 10 0 0022 12z"/>
-        </svg>
-      </a>
+        <a href="https://www.tiktok.com/@amtorecords?_r=1&_t=ZN-94sRv4yaOSE" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M12.75 2h2.5c.25 2.12 1.84 3.84 3.95 4.13v2.52c-1.53-.05-2.99-.5-4.25-1.28v6.94c0 3.86-3.14 7-7 7s-7-3.14-7-7 3.14-7 7-7c.33 0 .65.02.97.07v2.55c-.31-.07-.63-.1-.97-.1-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5 4.5-2.02 4.5-4.5V2z"/></svg>
+        </a>
+
+        <a href="https://www.facebook.com/share/18KivqoEUK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99h-2.7V12h2.7V9.8c0-2.67 1.6-4.14 4.05-4.14 1.17 0 2.4.21 2.4.21v2.64h-1.35c-1.33 0-1.75.83-1.75 1.68V12h2.98l-.48 2.88h-2.5v6.99A10 10 0 0022 12z"/></svg>
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="releases">
+    <h2 class="section-title">
+      <span class="pt">Lançamentos</span>
+      <span class="en">Releases</span>
+    </h2>
+
+    <div class="release-grid">
+
+      <a class="release-card" href="ficamos-por-ir.html">
+        <img src="ficamos-por-ir.jpg" alt="Ficámos por Ir cover">
+        <h3>
+          <span class="pt">Ficámos por Ir</span>
+          <span class="en">Ficámos por Ir</span>
+        </h3>
+        <p>
+          <span class="pt">Lugares, promessas e silêncios que ficaram por viver.</span>
+          <span class="en">Places, promises and silences left unlived.</span>
+        </p>
+      </a>
+
+      <a class="release-card" href="no-teu-dia.html">
+        <img src="no-teu-dia.jpg" alt="No Teu Dia cover">
+        <h3>
+          <span class="pt">No Teu Dia</span>
+          <span class="en">On Your Day</span>
+        </h3>
+        <p>
+          <span class="pt">Uma memória acesa no tempo, com o mar sempre por perto.</span>
+          <span class="en">A memory held in time, with the sea always close by.</span>
+        </p>
+      </a>
+
+      <a class="release-card" href="79-dias.html">
+        <img src="79-dias.jpg" alt="79 Dias cover">
+        <h3>
+          <span class="pt">79 Dias</span>
+          <span class="en">79 Days</span>
+        </h3>
+        <p>
+          <span class="pt">O tempo passa, mas há ausências que continuam a falar connosco.</span>
+          <span class="en">Time passes, but some absences keep speaking to us.</span>
+        </p>
+      </a>
+
+      <div class="release-card coming">
+        <div class="coming-inner">
+          <p>
+            <span class="pt">Ainda por dizer</span>
+            <span class="en">Still to be said</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const cards = document.querySelectorAll('.release-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.classList.contains('coming') ? 900 : index * 180;
+          setTimeout(() => {
+            entry.target.classList.add('show');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    cards.forEach(card => observer.observe(card));
+
+    let currentLang = "pt";
+
+    function toggleLang() {
+      currentLang = currentLang === "pt" ? "en" : "pt";
+
+      document.querySelectorAll(".pt").forEach(el => {
+        el.style.display = currentLang === "pt" ? "inline" : "none";
+      });
+
+      document.querySelectorAll(".en").forEach(el => {
+        el.style.display = currentLang === "en" ? "inline" : "none";
+      });
+    }
+  </script>
 
 </body>
 </html>
