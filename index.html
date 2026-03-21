@@ -1,95 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMTO Records</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMTO Records</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: black;
-      font-family: Arial, sans-serif;
-      color: white;
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
 
-    .hero {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-      background: black;
-    }
+/* VIDEO */
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
 
-    video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      z-index: 1;
-    }
+/* LINKS (bottom center) */
+.links {
+  position: fixed;
+  bottom: 25px;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+}
 
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 2;
-    }
+/* LINK STYLE */
+.links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 14px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
 
-    .content {
-      position: relative;
-      z-index: 3;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 56px;
-      margin: 0 0 10px;
-      letter-spacing: 1px;
-    }
-
-    p {
-      font-size: 20px;
-      margin: 0;
-      opacity: 0.9;
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 40px; }
-      p { font-size: 16px; }
-    }
-  </style>
+.links a:hover {
+  opacity: 1;
+}
+</style>
 </head>
 
 <body>
 
-  <section class="hero">
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop playsinline>
+  <source src="lv_0_20260320192328.mp4" type="video/mp4">
+</video>
 
-    <!-- YOUR VIDEO (fixed path) -->
-    <video autoplay muted loop playsinline preload="auto">
-      <source src="lv_0_20260320192328.mp4" type="video/mp4">
-    </video>
-
-    <!-- OVERLAY -->
-    <div class="overlay"></div>
-
-    <!-- TEXT -->
-    <div class="content">
-      <h1>AMTO Records</h1>
-      <p>A memory that lives through music</p>
-    </div>
-
-  </section>
+<!-- SOCIAL LINKS -->
+<div class="links">
+  <a href="https://open.spotify.com/album/1YrS9PMgvEPWKwztOWW7sJ?si=0hwpfQWkQeqUhxPufRXwsQ" target="_blank">Spotify</a>
+  <a href="https://www.instagram.com/amtorecords?igsh=dmExZm5xZW4wb3M4" target="_blank">Instagram</a>
+  <a href="https://www.tiktok.com/@amtorecords?_r=1&_t=ZN-94sRv4yaOSE" target="_blank">TikTok</a>
+  <a href="https://www.facebook.com/share/18KivqoEUK/" target="_blank">Facebook</a>
+</div>
 
 </body>
 </html>
