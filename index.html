@@ -6,33 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>AMTO Records | Música, memória e legado</title>
-  <meta name="description" content="AMTO Records é uma editora independente criada para dar casa à música, à memória e ao legado. Descobre Love You Bye e os próximos lançamentos." />
+  <meta name="description" content="AMTO Records é uma editora criada para dar casa à música, à memória e ao legado. Descobre Love You Bye e os próximos lançamentos." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#000000" />
   <meta name="format-detection" content="telephone=no" />
+  <link rel="canonical" href="https://amtorecords.com/" />
 
-  <!-- Replace with your real domain when live -->
-  <link rel="canonical" href="https://yourdomain.com/" />
-
-  <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AMTO Records" />
   <meta property="og:title" content="AMTO Records | Música, memória e legado" />
   <meta property="og:description" content="Uma editora criada para dar casa à música, à memória e ao legado." />
-  <meta property="og:url" content="https://yourdomain.com/" />
-  <meta property="og:image" content="https://yourdomain.com/love-you-bye-cover.jpg" />
+  <meta property="og:url" content="https://amtorecords.com/" />
+  <meta property="og:image" content="https://amtorecords.com/love-you-bye-cover.jpg" />
   <meta property="og:image:alt" content="Capa do lançamento Love You Bye" />
   <meta property="og:locale" content="pt_PT" />
 
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"MusicLabel",
-    "name":"AMTO Records",
-    "url":"https://yourdomain.com/",
-    "description":"AMTO Records é uma editora independente criada para dar casa à música, à memória e ao legado.",
-    "image":"https://yourdomain.com/love-you-bye-cover.jpg",
-    "sameAs":[
+    "@context": "https://schema.org",
+    "@type": "MusicLabel",
+    "name": "AMTO Records",
+    "url": "https://amtorecords.com/",
+    "description": "AMTO Records é uma editora criada para dar casa à música, à memória e ao legado.",
+    "image": "https://amtorecords.com/love-you-bye-cover.jpg",
+    "sameAs": [
       "https://open.spotify.com/album/1YrS9PMgvEPWKwztOWW7sJ?si=wUc-hFijQ7q6qJb2ONSK1g",
       "https://www.instagram.com/amtorecords?igsh=dmExZm5xZW4wb3M4",
       "https://www.tiktok.com/@amtorecords?_r=1&_t=ZN-94sRv4yaOSE",
@@ -46,14 +43,15 @@
       --bg: #000;
       --text: #fff;
       --muted: rgba(255,255,255,0.76);
-      --border: rgba(255,255,255,0.11);
+      --soft: rgba(255,255,255,0.58);
+      --border: rgba(255,255,255,0.10);
       --border-strong: rgba(255,255,255,0.18);
-      --glass: rgba(0,0,0,0.34);
+      --glass: rgba(0,0,0,0.36);
       --shadow: 0 24px 70px rgba(0,0,0,0.42);
       --radius: 28px;
-      --container: 1200px;
-      --focus: rgba(255,255,255,0.95);
-      --hero-bottom-space: 132px;
+      --container: 1240px;
+      --focus: rgba(255,255,255,0.96);
+      --bottom-ui-space: 132px;
     }
 
     * {
@@ -68,7 +66,7 @@
     body {
       margin: 0;
       min-width: 320px;
-      background: var(--bg);
+      background: #000;
       color: var(--text);
       font-family: Arial, sans-serif;
       overflow-x: hidden;
@@ -118,6 +116,7 @@
       outline-offset: 3px;
     }
 
+    /* Background video */
     .video-bg {
       position: fixed;
       inset: 0;
@@ -147,13 +146,14 @@
       pointer-events: none;
       background:
         radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 48%),
-        radial-gradient(circle at center, rgba(0,0,0,0.08), transparent 72%),
-        linear-gradient(to bottom,
-          rgba(0,0,0,0.16) 0%,
-          rgba(0,0,0,0.10) 24%,
-          rgba(0,0,0,0.16) 52%,
-          rgba(0,0,0,0.30) 78%,
-          rgba(0,0,0,0.46) 100%);
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.12) 0%,
+          rgba(0,0,0,0.08) 24%,
+          rgba(0,0,0,0.14) 52%,
+          rgba(0,0,0,0.28) 78%,
+          rgba(0,0,0,0.44) 100%
+        );
     }
 
     .scroll-darken {
@@ -161,17 +161,19 @@
       inset: 0;
       z-index: -3;
       pointer-events: none;
-      background:
-        linear-gradient(to bottom,
-          rgba(0,0,0,0.00) 0%,
-          rgba(0,0,0,0.10) 28%,
-          rgba(0,0,0,0.24) 54%,
-          rgba(0,0,0,0.46) 76%,
-          rgba(0,0,0,0.70) 100%);
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.00) 0%,
+        rgba(0,0,0,0.08) 28%,
+        rgba(0,0,0,0.22) 54%,
+        rgba(0,0,0,0.44) 76%,
+        rgba(0,0,0,0.68) 100%
+      );
       opacity: 0.18;
       transition: opacity 0.16s linear;
     }
 
+    /* Floating UI */
     .topbar {
       position: fixed;
       top: max(14px, env(safe-area-inset-top));
@@ -271,39 +273,44 @@
       display: block;
     }
 
+    /* Hero */
     .hero {
       min-height: 100vh;
       min-height: 100svh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 28px 18px var(--hero-bottom-space);
+      padding: 28px 18px var(--bottom-ui-space);
       text-align: center;
     }
 
     .hero-inner {
       width: 100%;
-      max-width: 840px;
+      max-width: 920px;
       margin: 0 auto;
-      padding-top: 24px;
+      padding-top: 10px;
     }
 
-    .hero-logo {
-      width: min(86vw, 620px);
-      margin: 0 auto;
-      opacity: 0.76;
-      filter: drop-shadow(0 12px 38px rgba(0,0,0,0.45));
+    .hero-wordmark {
+      margin: 0;
+      font-size: clamp(38px, 9vw, 88px);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      text-wrap: balance;
+      text-shadow: 0 12px 38px rgba(0,0,0,0.45);
     }
 
     .hero-copy {
       max-width: 760px;
       margin: 18px auto 0;
-      color: rgba(255,255,255,0.80);
+      color: rgba(255,255,255,0.82);
       font-size: clamp(15px, 2vw, 18px);
       line-height: 1.7;
       text-wrap: balance;
     }
 
+    /* Page content */
     .content {
       position: relative;
       z-index: 2;
@@ -357,6 +364,7 @@
       text-transform: uppercase;
     }
 
+    /* Featured release */
     .feature-shell {
       position: relative;
       border-radius: 36px;
@@ -480,6 +488,7 @@
       background: rgba(255,255,255,0.92);
     }
 
+    /* Origin */
     .origin-cinematic {
       position: relative;
       overflow: hidden;
@@ -557,6 +566,7 @@
     .origin-preview-show .delay-3 { transition-delay: 0.30s; }
     .origin-preview-show .delay-4 { transition-delay: 0.42s; }
 
+    /* Release grid */
     .release-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -813,10 +823,10 @@
 
   <header class="hero" aria-label="AMTO Records hero">
     <div class="hero-inner">
-      <img class="hero-logo" src="AMTO-logo.png" alt="AMTO Records logo" onerror="this.style.display='none'">
+      <h1 class="hero-wordmark">AMTO Records</h1>
       <p class="hero-copy">
-        <span class="pt">Uma editora criada para dar casa à música, à memória e ao legado.</span>
-        <span class="en">A label created to give a home to music, memory and legacy.</span>
+        <span class="pt">Música, memória e legado.</span>
+        <span class="en">Music, memory and legacy.</span>
       </p>
     </div>
   </header>
@@ -825,10 +835,10 @@
 
     <section class="section" id="released-section" aria-labelledby="released-heading">
       <div class="section-head">
-        <h1 id="released-heading">
+        <h2 id="released-heading">
           <span class="pt">Para quem quiser ouvir</span>
           <span class="en">For those who want to listen</span>
-        </h1>
+        </h2>
         <p>
           <span class="pt">O primeiro lançamento desta página. Tratado com cuidado, sem pressa, e com respeito pela história que o inspirou.</span>
           <span class="en">The first release on this page. Handled with care, without rush, and with respect for the story behind it.</span>
