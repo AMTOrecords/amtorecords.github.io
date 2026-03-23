@@ -1,291 +1,266 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Origem — AMTO Records</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Origin | AMTO Records</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --text: #ffffff;
-      --muted: rgba(255,255,255,0.82);
-      --soft: rgba(255,255,255,0.58);
-      --border: rgba(255,255,255,0.14);
-      --glass: rgba(0,0,0,0.44);
-      --shadow: 0 24px 70px rgba(0,0,0,0.45);
-      --radius: 24px;
-    }
-
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      color: var(--text);
       background: #000;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .bg-video-wrap {
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      background: #000;
-      overflow: hidden;
-    }
-
-    .bg-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .bg-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background:
-        radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 42%),
-        linear-gradient(to bottom,
-          rgba(0,0,0,0.42) 0%,
-          rgba(0,0,0,0.38) 24%,
-          rgba(0,0,0,0.52) 68%,
-          rgba(0,0,0,0.72) 100%);
-      pointer-events: none;
-    }
-
-    .topbar {
-      position: fixed;
-      top: 12px;
-      left: 0;
-      right: 0;
-      z-index: 20;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 12px;
-    }
-
-    .back-link,
-    .lang-toggle {
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(0,0,0,0.34);
       color: #fff;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      line-height: 1;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.8;
+      top: 0 !important;
     }
 
-    .lang-toggle {
-      cursor: pointer;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 72px 18px 36px;
-    }
-
-    .panel {
-      width: 100%;
-      max-width: 920px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.56));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      overflow: hidden;
-    }
-
-    .panel-inner {
-      padding: 28px 22px 30px;
-    }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      color: var(--soft);
-      font-size: 12px;
-      letter-spacing: 1.6px;
-      text-transform: uppercase;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 20px;
     }
 
     h1 {
-      margin: 0 0 8px;
-      font-size: 34px;
-      line-height: 1.05;
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
       font-weight: 600;
+      margin: 0 0 40px;
+      letter-spacing: 0.3px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin: 0 0 20px;
       letter-spacing: 0.2px;
     }
 
-    .name {
-      margin: 0 0 22px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.5;
+    p {
+      opacity: 0.88;
+      margin: 0 0 20px;
     }
 
-    .divider {
-      width: 64px;
-      height: 1px;
-      background: rgba(255,255,255,0.18);
-      margin: 18px 0 22px;
+    .translate {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      font-size: 12px;
     }
 
-    .text-block {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.9;
+    .goog-te-gadget {
+      font-family: 'Inter', sans-serif !important;
+      color: #fff !important;
     }
 
-    .text-block p {
-      margin: 0 0 18px;
+    .goog-te-gadget select {
+      background: #000;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 6px 8px;
+      font-size: 12px;
+      outline: none;
     }
 
-    .text-block p:last-child {
+    .goog-logo-link,
+    .goog-te-gadget span {
+      display: none !important;
+    }
+
+    .process-card {
+      margin-top: 80px;
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(2px);
+    }
+
+    .process-card p:last-child {
       margin-bottom: 0;
     }
 
-    .footer-note {
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      color: var(--soft);
-      font-size: 13px;
-      line-height: 1.6;
+    .human-line {
+      font-style: italic;
+      opacity: 1;
     }
 
-    @media (min-width: 900px) {
-      .panel-inner {
-        padding: 40px 42px 42px;
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 90px 20px 60px;
       }
 
       h1 {
-        font-size: 46px;
+        font-size: 34px;
       }
 
-      .name {
-        font-size: 17px;
+      h2 {
+        font-size: 24px;
       }
 
-      .text-block {
-        font-size: 17px;
-        line-height: 2;
+      .process-card {
+        padding: 28px 22px;
+        margin-top: 60px;
+      }
+
+      .translate {
+        top: 14px;
+        right: 14px;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <div class="bg-video-wrap">
-    <video class="bg-video" autoplay muted loop playsinline preload="auto">
-      <source src="lv_0_20260320192328.mp4" type="video/mp4">
-    </video>
+  <div id="google_translate_element" class="translate"></div>
+
+  <div class="container">
+    <h1 class="fade-in">Origin</h1>
+
+    <p class="fade-in">
+      O nome nasce das iniciais do meu pai.
+    </p>
+
+    <p class="fade-in">
+      Mas este projeto nunca foi apenas sobre um nome.
+    </p>
+
+    <p class="fade-in">
+      Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece. Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.
+    </p>
+
+    <p class="fade-in">
+      Há uma espécie de permanência nisso. Uma forma discreta de imortalidade.
+    </p>
+
+    <p class="fade-in">
+      Eu nunca vou esquecer o meu pai. Não preciso disto para o lembrar.
+    </p>
+
+    <p class="fade-in">
+      Isto existe para que ele não seja esquecido.
+    </p>
+
+    <p class="fade-in">
+      Para que o nome dele continue presente — não só na memória, mas em algo que pode ser encontrado, ouvido e sentido… muito depois de eu já cá não estar.
+    </p>
+
+    <p class="fade-in">
+      Há histórias aqui. Momentos. Fragmentos de uma vida que marcou.
+    </p>
+
+    <p class="fade-in">
+      Algumas são para quem o conheceu. Outras são para quem nunca teve essa oportunidade.
+    </p>
+
+    <p class="fade-in">
+      A minha sobrinha nasceu apenas três meses antes de ele partir. Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.
+    </p>
+
+    <p class="fade-in">
+      E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir — e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.
+    </p>
+
+    <p class="fade-in">
+      Porque a música transporta mais do que memória. Transporta presença.
+    </p>
+
+    <p class="fade-in">
+      Esta é a minha forma de o honrar.
+    </p>
+
+    <p class="fade-in">
+      E de garantir que, de alguma forma… ele permanece.
+    </p>
+
+    <div class="process-card fade-in">
+      <h2>How It’s Made</h2>
+
+      <p>
+        AMTO Records started with memory.<br>
+        With moments that stayed, conversations that linger, and feelings that never quite left.
+      </p>
+
+      <p>
+        Every release begins with something real — a moment, a feeling that stayed.
+      </p>
+
+      <p>
+        The lyrics come from lived experiences — real memories.
+      </p>
+
+      <p>
+        Turning those memories into music isn’t always straightforward.<br>
+        There isn’t always a traditional way to express what something felt like.
+      </p>
+
+      <p>
+        So I use the tools available to me.
+      </p>
+
+      <p>
+        That includes modern production tools, such as AI-assisted music creation. These tools help shape the sound, but they don’t create the meaning.
+      </p>
+
+      <p class="human-line">
+        The memories, the longing, the love, the pain, the grief, the concept, the words… these are all human.
+      </p>
+
+      <p>
+        This isn’t about replacing artistry — it’s about using new tools to express something human.
+      </p>
+
+      <p>
+        Love doesn’t disappear.<br>
+        It just changes shape.
+      </p>
+    </div>
   </div>
-
-  <div class="bg-overlay"></div>
-
-  <div class="topbar">
-    <a class="back-link" id="backLink" href="/index.html">← Voltar</a>
-    <button class="lang-toggle" onclick="toggleLang()">PT / EN</button>
-  </div>
-
-  <main class="page">
-    <section class="panel">
-      <div class="panel-inner">
-
-        <p class="eyebrow" id="eyebrow">A Origem</p>
-        <h1 id="title">AMTO</h1>
-        <p class="name" id="name">Artur Miguel Teixeira Oliveira</p>
-
-        <div class="divider"></div>
-
-        <div class="text-block" id="textBlock"></div>
-
-        <div class="footer-note" id="footerNote">AMTO Records</div>
-
-      </div>
-    </section>
-  </main>
 
   <script>
-    const content = {
-      pt: {
-        eyebrow: "A Origem",
-        back: "← Voltar",
-        paragraphs: [
-          "O nome nasce das iniciais do meu pai.",
-          "Mas este projeto nunca foi apenas sobre um nome.",
-          "Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece. Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.",
-          "Há uma espécie de permanência nisso. Uma forma discreta de imortalidade.",
-          "Eu nunca vou esquecer o meu pai. Não preciso disto para o lembrar.",
-          "Isto existe para que ele não seja esquecido.",
-          "Para que o nome dele continue presente — não só na memória, mas em algo que pode ser encontrado, ouvido e sentido… muito depois de eu já cá não estar.",
-          "Há histórias aqui. Momentos. Fragmentos de uma vida que marcou.",
-          "Algumas são para quem o conheceu. Outras são para quem nunca teve essa oportunidade.",
-          "A minha sobrinha nasceu apenas três meses antes de ele partir. Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.",
-          "E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir — e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.",
-          "Porque a música transporta mais do que memória. Transporta presença.",
-          "Esta é a minha forma de o honrar.",
-          "E de garantir que, de alguma forma… ele permanece."
-        ]
-      },
-      en: {
-        eyebrow: "The Origin",
-        back: "← Back",
-        paragraphs: [
-          "The name comes from my father’s initials.",
-          "But this project was never just about a name.",
-          "Over the years, through music, I came to understand that what we create doesn’t disappear. Even after we’re gone, it stays — in sound, in titles, and in the quiet traces we leave behind.",
-          "There’s a kind of permanence in that. A quiet form of immortality.",
-          "I will never forget my dad. I don’t need this to remember him.",
-          "This exists so that he is not forgotten.",
-          "So that his name continues to live — not only in memory, but in something that can be found, heard, and felt… long after I’m gone.",
-          "There are stories here. Moments. Fragments of a life that mattered.",
-          "Some of them are for those who knew him. Others are for those who never had the chance.",
-          "My niece was born just three months before he passed. He held her… but she will never remember him.",
-          "And one day, when she’s older, she will be able to come here — to listen, to feel — and meet him in a way that words alone could never give her.",
-          "Because music carries something more than memory. It carries presence.",
-          "This is my way of honouring him.",
-          "And of making sure that, in some form… he remains."
-        ]
-      }
-    };
-
-    let currentLang = "pt";
-
-    function renderLanguage(lang) {
-      document.documentElement.lang = lang;
-      document.getElementById("eyebrow").textContent = content[lang].eyebrow;
-      document.getElementById("backLink").textContent = content[lang].back;
-
-      const textBlock = document.getElementById("textBlock");
-      textBlock.innerHTML = content[lang].paragraphs
-        .map(paragraph => `<p>${paragraph}</p>`)
-        .join("");
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'en,pt',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
     }
 
-    function toggleLang() {
-      currentLang = currentLang === "pt" ? "en" : "pt";
-      renderLanguage(currentLang);
-    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
 
-    renderLanguage(currentLang);
+    document.querySelectorAll('.fade-in').forEach((el) => {
+      observer.observe(el);
+    });
   </script>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
