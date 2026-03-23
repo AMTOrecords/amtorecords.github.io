@@ -92,8 +92,13 @@
       color: inherit;
     }
 
-    .pt { display: inline; }
-    .en { display: none; }
+    /* language visibility fix */
+    .pt, .en {
+      display: inherit;
+    }
+
+    .lang-pt .en { display: none !important; }
+    .lang-en .pt { display: none !important; }
 
     :focus-visible {
       outline: 2px solid var(--focus);
@@ -1136,21 +1141,18 @@
 
     function applyLang(lang) {
       currentLang = lang === 'en' ? 'en' : 'pt';
+
       root.lang = currentLang;
-
-      document.querySelectorAll('.pt').forEach(el => {
-        el.style.display = currentLang === 'pt' ? '' : 'none';
-      });
-
-      document.querySelectorAll('.en').forEach(el => {
-        el.style.display = currentLang === 'en' ? '' : 'none';
-      });
+      root.classList.remove('lang-pt', 'lang-en');
+      root.classList.add(currentLang === 'pt' ? 'lang-pt' : 'lang-en');
 
       if (langToggle) {
         langToggle.setAttribute('aria-pressed', currentLang === 'en' ? 'true' : 'false');
         langToggle.setAttribute(
           'aria-label',
-          currentLang === 'pt' ? 'Mudar idioma para inglês' : 'Switch language to Portuguese'
+          currentLang === 'pt'
+            ? 'Mudar idioma para inglês'
+            : 'Switch language to Portuguese'
         );
       }
 
@@ -1182,7 +1184,7 @@
       try {
         localStorage.setItem('cookieConsent', 'accepted');
       } catch (e) {}
-      cookieBanner.style.display = 'none';
+      if (cookieBanner) cookieBanner.style.display = 'none';
       loadAnalytics();
     }
 
@@ -1190,7 +1192,7 @@
       try {
         localStorage.setItem('cookieConsent', 'declined');
       } catch (e) {}
-      cookieBanner.style.display = 'none';
+      if (cookieBanner) cookieBanner.style.display = 'none';
     }
 
     function setupConsent() {
@@ -1201,7 +1203,7 @@
 
       if (consent === 'accepted') {
         loadAnalytics();
-      } else if (consent !== 'declined') {
+      } else if (consent !== 'declined' && cookieBanner) {
         cookieBanner.style.display = 'flex';
       }
 
@@ -1228,7 +1230,11 @@
 
     currentLang = getInitialLang();
     applyLang(currentLang);
-    if (langToggle) langToggle.addEventListener('click', toggleLang);
+
+    if (langToggle) {
+      langToggle.addEventListener('click', toggleLang);
+    }
+
     setupConsent();
 
     if (!prefersReducedMotion && 'IntersectionObserver' in window) {
