@@ -1123,21 +1123,15 @@
 
     let currentLang = 'pt';
     let analyticsLoaded = false;
+function getInitialLang() {
+  try {
+    const saved = localStorage.getItem('amtoLang');
+    if (saved === 'pt' || saved === 'en') 
+      return saved;
+  } catch (e) {}
 
-    function getInitialLang() {
-      try {
-        const saved = localStorage.getItem('amtoLang');
-        if (saved === 'pt' || saved === 'en') return saved;
-      } catch (e) {}
-
-      const browserLang =
-        (navigator.languages && navigator.languages[0]) ||
-        navigator.language ||
-        navigator.userLanguage ||
-        'pt';
-
-      return browserLang.toLowerCase().startsWith('pt') ? 'pt' : 'en';
-    }
+  return 'pt';
+}
 
     function applyLang(lang) {
       currentLang = lang === 'en' ? 'en' : 'pt';
