@@ -1,167 +1,854 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
   <title>Origin | AMTO Records</title>
+  <meta name="description" content="A origem da AMTO Records — memória, presença, legado e a história por trás do nome." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="canonical" href="https://amtorecords.com/origin.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AMTO Records" />
+  <meta property="og:title" content="Origin | AMTO Records" />
+  <meta property="og:description" content="A história por trás do nome, da memória e do legado da AMTO Records." />
+  <meta property="og:url" content="https://amtorecords.com/origin.html" />
+  <meta property="og:image" content="https://amtorecords.com/love-you-bye-cover.jpg" />
+  <meta property="og:image:alt" content="Capa do lançamento Love You Bye" />
+  <meta property="og:locale" content="pt_PT" />
 
   <style>
+    :root {
+      --bg: #000;
+      --text: #fff;
+      --muted: rgba(255,255,255,0.74);
+      --soft: rgba(255,255,255,0.56);
+      --border: rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.18);
+      --glass: rgba(0,0,0,0.38);
+      --shadow: 0 24px 70px rgba(0,0,0,0.42);
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.28);
+      --radius: 28px;
+      --container: 1180px;
+      --bottom-ui: calc(92px + env(safe-area-inset-bottom));
+      --focus: rgba(255,255,255,0.96);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
+      min-width: 320px;
       background: #000;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    img, video {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+    }
+
+    .pt { display: inline; }
+    .en { display: none; }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 14px;
+      z-index: 100;
+      background: #fff;
+      color: #000;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 14px;
+    }
+
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      overflow: hidden;
+      background: #000;
+      pointer-events: none;
+    }
+
+    .video-bg video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: none !important;
+      filter: none !important;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.02), transparent 48%),
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.16) 0%,
+          rgba(0,0,0,0.12) 24%,
+          rgba(0,0,0,0.18) 56%,
+          rgba(0,0,0,0.34) 80%,
+          rgba(0,0,0,0.48) 100%
+        );
+    }
+
+    .topbar {
+      position: fixed;
+      top: max(14px, env(safe-area-inset-top));
+      right: max(14px, env(safe-area-inset-right));
+      z-index: 50;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .lang-toggle,
+    .back-link {
+      min-height: 44px;
+      min-width: 78px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.34);
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lang-toggle:hover,
+    .lang-toggle:active,
+    .back-link:hover,
+    .back-link:active {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.20);
+    }
+
+    .social-wrap {
+      position: fixed;
+      left: 50%;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      z-index: 46;
+      max-width: calc(100vw - 24px);
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 12px 15px;
+      border-radius: 999px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .socials a {
+      width: 23px;
+      height: 23px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.82);
+      transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
+    }
+
+    .socials a:hover,
+    .socials a:active,
+    .socials a:focus-visible {
       color: #fff;
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
+      transform: translateY(-1px) scale(1.08);
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.16));
+      outline: none;
     }
 
-    .container {
-      max-width: 800px;
+    .socials svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+      display: block;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      min-height: 100svh;
+      padding-bottom: var(--bottom-ui);
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--container);
       margin: 0 auto;
-      padding: 80px 20px;
+      padding: 42px 20px calc(var(--bottom-ui) + 40px);
     }
 
-    h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
+    .section {
+      margin-bottom: clamp(42px, 6vw, 72px);
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    p {
-      opacity: 0.85;
-      margin-bottom: 20px;
+    .page-hero {
+      padding-top: clamp(52px, 7vw, 90px);
+      margin-bottom: 26px;
     }
 
-    .divider {
-      height: 1px;
-      background: rgba(255,255,255,0.1);
-      margin: 40px 0;
+    .eyebrow {
+      margin: 0 0 10px;
+      color: rgba(255,255,255,0.56);
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      margin: 0 0 16px;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 600;
+      line-height: 0.96;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    .page-intro {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+      text-wrap: balance;
+    }
+
+    .origin-card,
+    .process-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .origin-card::before,
+    .process-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.06), transparent 28%),
+        radial-gradient(circle at 82% 78%, rgba(255,255,255,0.04), transparent 26%);
+    }
+
+    .origin-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg,
+          rgba(0,0,0,0.70) 0%,
+          rgba(0,0,0,0.46) 45%,
+          rgba(0,0,0,0.22) 100%);
+    }
+
+    .origin-inner,
+    .process-inner {
+      position: relative;
+      z-index: 1;
+      padding: 42px 28px;
+    }
+
+    .origin-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .origin-copy p,
+    .process-copy p {
+      margin: 0 0 18px;
+      color: rgba(255,255,255,0.82);
+      font-size: 15px;
+      line-height: 1.88;
+      text-wrap: pretty;
+    }
+
+    .origin-copy p:last-child,
+    .process-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .process-card h2 {
+      margin: 0 0 18px;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+
+    .process-quote {
+      color: #fff !important;
+      opacity: 0.96;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      text-align: center;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .button:hover,
+    .button:active {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+    }
+
+    .button.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .button.primary:hover,
+    .button.primary:active {
+      background: rgba(255,255,255,0.92);
+    }
+
+    .cookie-banner {
+      position: fixed;
+      left: 50%;
+      bottom: max(18px, calc(18px + env(safe-area-inset-bottom)));
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: min(680px, calc(100vw - 24px));
+      display: none;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.86);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.34);
+    }
+
+    .cookie-copy {
+      flex: 1;
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.86);
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-btn {
+      min-height: 40px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cookie-btn:hover,
+    .cookie-btn:active {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .cookie-btn.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    @media (min-width: 1024px) {
+      .origin-inner,
+      .process-inner {
+        padding: 54px 46px;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .content {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .topbar {
+        right: max(12px, env(safe-area-inset-right));
+      }
+    }
+
+    @media (max-width: 560px) {
+      :root {
+        --bottom-ui: calc(88px + env(safe-area-inset-bottom));
+      }
+
+      .content {
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-bottom: calc(var(--bottom-ui) + 42px);
+      }
+
+      .origin-inner,
+      .process-inner {
+        padding: 32px 20px;
+      }
+
+      .socials {
+        gap: 14px;
+        padding: 10px 12px;
+      }
+
+      .socials a {
+        width: 21px;
+        height: 21px;
+      }
+
+      .lang-toggle,
+      .back-link {
+        min-width: 74px;
+        padding: 9px 12px;
+      }
+
+      .cookie-banner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cookie-actions {
+        width: 100%;
+      }
+
+      .cookie-btn {
+        flex: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+
+      .section {
+        opacity: 1 !important;
+        transform: none !important;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
+  <a href="#main-content" class="skip-link">
+    <span class="pt">Saltar para o conteúdo</span>
+    <span class="en">Skip to content</span>
+  </a>
 
-    <h1>Origin</h1>
-
-    <p>
-      O nome nasce das iniciais do meu pai.
-    </p>
-
-    <p>
-      Mas este projeto nunca foi apenas sobre um nome.
-    </p>
-
-    <p>
-      Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece.
-      Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.
-    </p>
-
-    <p>
-      Há uma espécie de permanência nisso.
-      Uma forma discreta de imortalidade.
-    </p>
-
-    <p>
-      Eu nunca vou esquecer o meu pai.
-      Não preciso disto para o lembrar.
-    </p>
-
-    <p>
-      Isto existe para que ele não seja esquecido.
-    </p>
-
-    <p>
-      Para que o nome dele continue presente — não só na memória,
-      mas em algo que pode ser encontrado, ouvido e sentido…
-      muito depois de eu já cá não estar.
-    </p>
-
-    <p>
-      Há histórias aqui.
-      Momentos.
-      Fragmentos de uma vida que marcou.
-    </p>
-
-    <p>
-      Algumas são para quem o conheceu.
-      Outras são para quem nunca teve essa oportunidade.
-    </p>
-
-    <p>
-      A minha sobrinha nasceu apenas três meses antes de ele partir.
-      Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.
-    </p>
-
-    <p>
-      E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir —
-      e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.
-    </p>
-
-    <p>
-      Porque a música transporta mais do que memória.
-      Transporta presença.
-    </p>
-
-    <p>
-      Esta é a minha forma de o honrar.
-    </p>
-
-    <p>
-      E de garantir que, de alguma forma… ele permanece.
-    </p>
-
-    <div class="divider"></div>
-
-    <h2>How It’s Made</h2>
-
-    <p>
-      AMTO Records started with memory.
-      With moments that stayed, conversations that linger, and feelings that never quite left.
-    </p>
-
-    <p>
-      Every release begins with something real —
-      a moment, a feeling that stayed.
-    </p>
-
-    <p>
-      The lyrics come from lived experiences — real memories.
-    </p>
-
-    <p>
-      Turning those memories into music isn’t always straightforward.
-      There isn’t always a traditional way to express what something felt like.
-    </p>
-
-    <p>
-      So I use the tools available to me.
-    </p>
-
-    <p>
-      That includes modern production tools, such as AI-assisted music creation.
-      These tools help shape the sound, but they don’t create the meaning.
-    </p>
-
-    <p>
-      The memories, the longing, the love, the pain, the grief, the concept, the words…
-      these are all human.
-    </p>
-
-    <p>
-      This isn’t about replacing artistry.
-      It’s about using new tools to express something human.
-    </p>
-
-    <p>
-      Love doesn’t disappear.
-      It just changes shape.
-    </p>
-
+  <div class="video-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="metadata" poster="love-you-bye-cover.jpg">
+      <source src="lv_0_20260320192328.mp4" type="video/mp4" />
+    </video>
   </div>
+
+  <div class="video-overlay" aria-hidden="true"></div>
+
+  <div class="topbar">
+    <a href="index.html" class="back-link">
+      <span class="pt">Voltar</span>
+      <span class="en">Back</span>
+    </a>
+
+    <button
+      class="lang-toggle"
+      id="langToggle"
+      type="button"
+      aria-label="Mudar idioma para inglês"
+      aria-pressed="false"
+    >
+      PT / EN
+    </button>
+  </div>
+
+  <div class="social-wrap">
+    <nav class="socials" aria-label="Social media links">
+      <a href="https://youtube.com/playlist?list=PLya8w-qeqMVzlUGjZovJXTzaHVs7K2HMb&si=jN2VuRprNcHYOmX-" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.87.58 9.39.58 9.39.58s7.52 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8zM9.75 15.52V8.48L15.98 12l-6.23 3.52z"/></svg>
+      </a>
+
+      <a href="https://www.instagram.com/amtorecords?igsh=dmExZm5xZW4wb3M4" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5C19.66 2 22 4.34 22 7.75v8.5C22 19.66 19.66 22 16.25 22h-8.5C4.34 22 2 19.66 2 16.25v-8.5C2 4.34 4.34 2 7.75 2zm0 2C5.68 4 4 5.68 4 7.75v8.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 3.75-3.75v-8.5C20 5.68 18.32 4 16.25 4h-8.5zm8.75 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+      </a>
+
+      <a href="https://www.tiktok.com/@amtorecords?_r=1&_t=ZN-94sRv4yaOSE" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.75 2h2.5c.25 2.12 1.84 3.84 3.95 4.13v2.52c-1.53-.05-2.99-.5-4.25-1.28v6.94c0 3.86-3.14 7-7 7s-7-3.14-7-7 3.14-7 7-7c.33 0 .65.02.97.07v2.55c-.31-.07-.63-.1-.97-.1-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5 4.5-2.02 4.5-4.5V2z"/></svg>
+      </a>
+
+      <a href="https://www.facebook.com/share/18KivqoEUK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99h-2.7V12h2.7V9.8c0-2.67 1.6-4.14 4.05-4.14 1.17 0 2.4.21 2.4.21v2.64h-1.35c-1.33 0-1.75.83-1.75 1.68V12h2.98l-.48 2.88h-2.5v6.99A10 10 0 0022 12z"/></svg>
+      </a>
+
+      <a href="https://open.spotify.com/album/1YrS9PMgvEPWKwztOWW7sJ?si=wUc-hFijQ7q6qJb2ONSK1g" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.52 17.34c-.22.36-.68.48-1.04.26-2.86-1.75-6.47-2.15-10.75-1.18-.41.09-.82-.16-.91-.57-.09-.41.16-.82.57-.91 4.64-1.05 8.61-.6 11.87 1.33.36.22.48.68.26 1.07zm1.49-3.31c-.27.43-.84.57-1.27.3-3.27-2.01-8.26-2.59-12.13-1.4-.48.14-.98-.13-1.12-.61-.14-.48.13-.98.61-1.12 4.31-1.3 9.86-.67 13.62 1.62.43.27.57.84.29 1.21zm.13-3.45C15.7 8.6 8.69 8.4 5.56 9.36c-.57.17-1.18-.15-1.35-.72-.17-.57.15-1.18.72-1.35 3.58-1.09 11.34-.87 15.48 1.49.52.3.7.96.4 1.48-.29.51-.96.7-1.47.4z"/></svg>
+      </a>
+    </nav>
+  </div>
+
+  <div class="page-shell">
+    <main class="content" id="main-content">
+      <section class="section page-hero">
+        <p class="eyebrow">
+          <span class="pt">A origem</span>
+          <span class="en">The origin</span>
+        </p>
+
+        <h1 class="page-title">
+          <span class="pt">O nome por trás da AMTO Records</span>
+          <span class="en">The name behind AMTO Records</span>
+        </h1>
+
+        <p class="page-intro">
+          <span class="pt">Um espaço construído a partir da memória, da presença e daquilo que continua, mesmo depois da ausência.</span>
+          <span class="en">A space built from memory, presence, and what continues to remain even after absence.</span>
+        </p>
+      </section>
+
+      <section class="section">
+        <article class="origin-card">
+          <div class="origin-inner">
+            <div class="origin-grid">
+              <div class="origin-copy pt">
+                <p>O nome nasce das iniciais do meu pai.</p>
+                <p>Mas este projeto nunca foi apenas sobre um nome.</p>
+                <p>Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece. Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.</p>
+                <p>Há uma espécie de permanência nisso. Uma forma discreta de imortalidade.</p>
+                <p>Eu nunca vou esquecer o meu pai. Não preciso disto para o lembrar.</p>
+                <p>Isto existe para que ele não seja esquecido.</p>
+                <p>Para que o nome dele continue presente — não só na memória, mas em algo que pode ser encontrado, ouvido e sentido… muito depois de eu já cá não estar.</p>
+                <p>Há histórias aqui. Momentos. Fragmentos de uma vida que marcou.</p>
+                <p>Algumas são para quem o conheceu. Outras são para quem nunca teve essa oportunidade.</p>
+                <p>A minha sobrinha nasceu apenas três meses antes de ele partir. Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.</p>
+                <p>E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir — e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.</p>
+                <p>Porque a música transporta mais do que memória. Transporta presença.</p>
+                <p>Esta é a minha forma de o honrar.</p>
+                <p>E de garantir que, de alguma forma… ele permanece.</p>
+              </div>
+
+              <div class="origin-copy en">
+                <p>The name comes from my father’s initials.</p>
+                <p>But this project was never only about a name.</p>
+                <p>Over the years, through music, I began to understand that what we create does not disappear. Even after we are gone, something remains — in sound, in titles, in the silent marks we leave behind.</p>
+                <p>There is a kind of permanence in that. A quiet form of immortality.</p>
+                <p>I will never forget my father. I do not need this to remember him.</p>
+                <p>This exists so that he is not forgotten.</p>
+                <p>So that his name continues to remain present — not only in memory, but in something that can still be found, heard, and felt… long after I am no longer here.</p>
+                <p>There are stories here. Moments. Fragments of a life that left a mark.</p>
+                <p>Some are for those who knew him. Others are for those who never had that chance.</p>
+                <p>My niece was born just three months before he passed away. He held her in his arms… but she will never remember him.</p>
+                <p>And one day, when she is older, she will be able to come here — listen, feel — and know him in a way words alone could never fully give.</p>
+                <p>Because music carries more than memory. It carries presence.</p>
+                <p>This is my way of honouring him.</p>
+                <p>And of making sure that, somehow… he remains.</p>
+              </div>
+            </div>
+
+            <div class="button-row">
+              <a href="love-you-bye.html" class="button primary">
+                <span class="pt">Ouvir Love You Bye</span>
+                <span class="en">Listen to Love You Bye</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="process-card">
+          <div class="process-inner">
+            <h2>
+              <span class="pt">How It’s Made</span>
+              <span class="en">How It’s Made</span>
+            </h2>
+
+            <div class="process-copy pt">
+              <p>AMTO Records started with memory. With moments that stayed, conversations that linger, and feelings that never quite left.</p>
+              <p>Every release begins with something real — a moment, a feeling that stayed.</p>
+              <p>The lyrics come from lived experiences — real memories.</p>
+              <p>Turning those memories into music isn’t always straightforward. There isn’t always a traditional way to express what something felt like.</p>
+              <p>So I use the tools available to me.</p>
+              <p>That includes modern production tools, such as AI-assisted music creation. These tools help shape the sound, but they don’t create the meaning.</p>
+              <p class="process-quote">The memories, the longing, the love, the pain, the grief, the concept, the words… these are all human.</p>
+              <p>This isn’t about replacing artistry — it’s about using new tools to express something human.</p>
+              <p>Love doesn’t disappear. It just changes shape.</p>
+            </div>
+
+            <div class="process-copy en">
+              <p>AMTO Records started with memory. With moments that stayed, conversations that linger, and feelings that never quite left.</p>
+              <p>Every release begins with something real — a moment, a feeling that stayed.</p>
+              <p>The lyrics come from lived experiences — real memories.</p>
+              <p>Turning those memories into music isn’t always straightforward. There isn’t always a traditional way to express what something felt like.</p>
+              <p>So I use the tools available to me.</p>
+              <p>That includes modern production tools, such as AI-assisted music creation. These tools help shape the sound, but they don’t create the meaning.</p>
+              <p class="process-quote">The memories, the longing, the love, the pain, the grief, the concept, the words… these are all human.</p>
+              <p>This isn’t about replacing artistry — it’s about using new tools to express something human.</p>
+              <p>Love doesn’t disappear. It just changes shape.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <div class="cookie-copy">
+      <span class="pt">Usamos cookies para melhorar a experiência e perceber como o site é usado.</span>
+      <span class="en">We use cookies to improve your experience and understand how the site is used.</span>
+    </div>
+    <div class="cookie-actions">
+      <button class="cookie-btn primary" type="button" id="cookieAccept">
+        <span class="pt">Aceitar</span>
+        <span class="en">Accept</span>
+      </button>
+      <button class="cookie-btn" type="button" id="cookieDecline">
+        <span class="pt">Recusar</span>
+        <span class="en">Decline</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll('.section');
+    const langToggle = document.getElementById('langToggle');
+    const root = document.documentElement;
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAccept = document.getElementById('cookieAccept');
+    const cookieDecline = document.getElementById('cookieDecline');
+
+    let currentLang = 'pt';
+    let analyticsLoaded = false;
+
+    function getInitialLang() {
+      try {
+        const saved = localStorage.getItem('amtoLang');
+        if (saved === 'pt' || saved === 'en') return saved;
+      } catch (e) {}
+
+      const browserLang =
+        (navigator.languages && navigator.languages[0]) ||
+        navigator.language ||
+        navigator.userLanguage ||
+        'pt';
+
+      return browserLang.toLowerCase().startsWith('pt') ? 'pt' : 'en';
+    }
+
+    function applyLang(lang) {
+      currentLang = lang === 'en' ? 'en' : 'pt';
+      root.lang = currentLang;
+
+      document.querySelectorAll('.pt').forEach(el => {
+        el.style.display = currentLang === 'pt' ? '' : 'none';
+      });
+
+      document.querySelectorAll('.en').forEach(el => {
+        el.style.display = currentLang === 'en' ? '' : 'none';
+      });
+
+      if (langToggle) {
+        langToggle.setAttribute('aria-pressed', currentLang === 'en' ? 'true' : 'false');
+        langToggle.setAttribute(
+          'aria-label',
+          currentLang === 'pt' ? 'Mudar idioma para inglês' : 'Switch language to Portuguese'
+        );
+      }
+
+      try {
+        localStorage.setItem('amtoLang', currentLang);
+      } catch (e) {}
+    }
+
+    function toggleLang() {
+      applyLang(currentLang === 'pt' ? 'en' : 'pt');
+    }
+
+    function loadAnalytics() {
+      if (analyticsLoaded) return;
+      analyticsLoaded = true;
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Y83DPL5W97';
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-Y83DPL5W97');
+    }
+
+    function acceptCookies() {
+      try {
+        localStorage.setItem('cookieConsent', 'accepted');
+      } catch (e) {}
+      cookieBanner.style.display = 'none';
+      loadAnalytics();
+    }
+
+    function declineCookies() {
+      try {
+        localStorage.setItem('cookieConsent', 'declined');
+      } catch (e) {}
+      cookieBanner.style.display = 'none';
+    }
+
+    function setupConsent() {
+      let consent = null;
+      try {
+        consent = localStorage.getItem('cookieConsent');
+      } catch (e) {}
+
+      if (consent === 'accepted') {
+        loadAnalytics();
+      } else if (consent !== 'declined') {
+        cookieBanner.style.display = 'flex';
+      }
+
+      if (cookieAccept) cookieAccept.addEventListener('click', acceptCookies);
+      if (cookieDecline) cookieDecline.addEventListener('click', declineCookies);
+    }
+
+    currentLang = getInitialLang();
+    applyLang(currentLang);
+    if (langToggle) langToggle.addEventListener('click', toggleLang);
+    setupConsent();
+
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14 });
+
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('show'));
+    }
+  </script>
 </body>
 </html>
