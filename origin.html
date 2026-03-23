@@ -278,6 +278,9 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
+    .memorial-card {
+  background: rgba(0,0,0,0.35);
+    }
 
     .origin-card {
       box-shadow: 0 30px 80px rgba(0,0,0,0.55);
@@ -307,17 +310,38 @@
           rgba(0,0,0,0.22) 100%);
     }
 
-    .memorial-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 24% 32%, rgba(255,255,255,0.055), transparent 26%),
-        radial-gradient(circle at 72% 70%, rgba(255,255,255,0.035), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.018), transparent 35%, rgba(255,255,255,0.012));
-      opacity: 0.9;
-    }
+    .memorial-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('chesil-sea.png') center/cover no-repeat;
+
+  opacity: 0.22;
+  filter: blur(8px);
+  transform: scale(1.08);
+
+  pointer-events: none;
+}
+
+.memorial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0.55) 0%,
+      rgba(0,0,0,0.75) 60%,
+      rgba(0,0,0,0.92) 100%
+    ),
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255,255,255,0.06),
+      transparent 40%
+    );
+}
 
     .origin-inner,
     .process-inner,
