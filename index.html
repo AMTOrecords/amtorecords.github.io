@@ -92,7 +92,6 @@
       color: inherit;
     }
 
-    /* language visibility fix */
     .pt, .en {
       display: inherit;
     }
@@ -842,7 +841,7 @@
   </a>
 
   <div class="video-bg" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="metadata" poster="love-you-bye-cover.jpg">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="love-you-bye-cover.jpg">
       <source src="lv_0_20260320192328.mp4" type="video/mp4" />
     </video>
   </div>
@@ -995,9 +994,9 @@
           </p>
 
           <h2 class="origin-title" id="origin-heading">
-  <span class="pt">A origem de AMTO Records</span>
-  <span class="en">The origin of AMTO Records</span>
-</h2>
+            <span class="pt">A origem de AMTO Records</span>
+            <span class="en">The origin of AMTO Records</span>
+          </h2>
 
           <p class="origin-copy origin-line delay-1">
             <span class="pt">AMTO nasce das iniciais do nome do meu pai.</span>
@@ -1120,18 +1119,19 @@
     const cookieBanner = document.getElementById('cookieBanner');
     const cookieAccept = document.getElementById('cookieAccept');
     const cookieDecline = document.getElementById('cookieDecline');
+    const heroVideo = document.getElementById('heroVideo');
 
     let currentLang = 'pt';
     let analyticsLoaded = false;
-function getInitialLang() {
-  try {
-    const saved = localStorage.getItem('amtoLang');
-    if (saved === 'pt' || saved === 'en') 
-      return saved;
-  } catch (e) {}
 
-  return 'pt';
-}
+    function getInitialLang() {
+      try {
+        const saved = localStorage.getItem('amtoLang');
+        if (saved === 'pt' || saved === 'en') return saved;
+      } catch (e) {}
+
+      return 'pt';
+    }
 
     function applyLang(lang) {
       currentLang = lang === 'en' ? 'en' : 'pt';
@@ -1218,6 +1218,20 @@ function getInitialLang() {
       }
     }
 
+    function tryStartHeroVideo() {
+      if (!heroVideo) return;
+
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      heroVideo.setAttribute('muted', '');
+      heroVideo.setAttribute('playsinline', '');
+
+      const playPromise = heroVideo.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    }
+
     document.querySelectorAll('[data-track-category][data-track-label]').forEach(el => {
       el.addEventListener('click', trackClick);
     });
@@ -1277,7 +1291,14 @@ function getInitialLang() {
     }
 
     window.addEventListener('scroll', updateUI, { passive: true });
-    window.addEventListener('load', updateUI);
+    window.addEventListener('load', () => {
+      updateUI();
+      tryStartHeroVideo();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) tryStartHeroVideo();
+    });
   </script>
 </body>
 </html>
