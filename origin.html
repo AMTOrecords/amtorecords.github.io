@@ -47,6 +47,13 @@
       --container: 1180px;
       --bottom-ui: calc(92px + env(safe-area-inset-bottom));
       --focus: rgba(255,255,255,0.96);
+
+      --player-bg: rgba(255,255,255,0.035);
+      --player-border: rgba(255,255,255,0.10);
+      --player-glow: rgba(255,255,255,0.06);
+      --wave-idle: rgba(244, 241, 234, 0.26);
+      --wave-active: rgba(244, 241, 234, 0.92);
+      --wave-head: rgba(255,255,255,0.98);
     }
 
     * {
@@ -563,79 +570,179 @@
       background: rgba(255,255,255,0.92);
     }
 
+    /* Upgraded waveform player */
     .audio-player {
-      display: flex;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
       align-items: center;
-      gap: 12px;
-      padding: 14px 14px 14px 12px;
-      margin-top: 22px;
+      gap: 14px;
+      padding: 14px 16px 14px 14px;
+      margin-top: 24px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--player-border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.04),
-        0 10px 30px rgba(0,0,0,0.18);
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 10px 30px rgba(0,0,0,0.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .audio-player::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 20%, var(--player-glow), transparent 28%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03), transparent 30%);
     }
 
     .play-btn {
-      width: 40px;
-      height: 40px;
+      position: relative;
+      width: 52px;
+      height: 52px;
       border: 0;
       border-radius: 999px;
-      background: rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
       color: #fff;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
       flex-shrink: 0;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        0 8px 20px rgba(0,0,0,0.18);
     }
 
     .play-btn:hover,
     .play-btn:active {
       transform: scale(1.04);
-      background: rgba(255,255,255,0.18);
+      background: linear-gradient(180deg, rgba(255,255,255,0.17), rgba(255,255,255,0.08));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 10px 24px rgba(0,0,0,0.24);
     }
 
-    .progress {
-      flex: 1;
+    .play-btn .play-icon,
+    .play-btn .pause-icon {
+      width: 18px;
+      height: 18px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .play-btn .pause-icon {
+      display: none;
+    }
+
+    .audio-player.is-playing .play-btn .play-icon {
+      display: none;
+    }
+
+    .audio-player.is-playing .play-btn .pause-icon {
+      display: block;
+    }
+
+    .wave-shell {
+      position: relative;
+      min-width: 0;
+      width: 100%;
+      height: 46px;
+      display: flex;
+      align-items: center;
+    }
+
+    .wave-button {
       appearance: none;
       -webkit-appearance: none;
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.14);
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: transparent;
       outline: none;
+      cursor: pointer;
+      z-index: 4;
+      opacity: 0;
     }
 
-    .progress::-webkit-slider-thumb {
+    .wave-button::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #fff;
-      cursor: pointer;
+      width: 18px;
+      height: 46px;
+      background: transparent;
       border: 0;
+      cursor: pointer;
     }
 
-    .progress::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #fff;
-      cursor: pointer;
+    .wave-button::-moz-range-thumb {
+      width: 18px;
+      height: 46px;
+      background: transparent;
       border: 0;
+      cursor: pointer;
+    }
+
+    .waveform {
+      position: relative;
+      width: 100%;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: stretch;
+      gap: 3px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .waveform .bar {
+      flex: 1 1 auto;
+      min-width: 2px;
+      border-radius: 999px;
+      background: var(--wave-idle);
+      transition: background 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+      opacity: 0.92;
+    }
+
+    .waveform .bar.is-active {
+      background: var(--wave-active);
+      opacity: 1;
+      box-shadow: 0 0 10px rgba(255,255,255,0.04);
+    }
+
+    .wave-head {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: 12px;
+      height: 12px;
+      margin-left: -6px;
+      border-radius: 999px;
+      background: var(--wave-head);
+      transform: translateY(-50%);
+      box-shadow: 0 0 0 5px rgba(255,255,255,0.04);
+      z-index: 3;
+      pointer-events: none;
+      transition: left 0.08s linear;
     }
 
     .time {
-      min-width: 38px;
+      min-width: 42px;
       text-align: right;
       font-size: 12px;
       color: rgba(255,255,255,0.62);
       flex-shrink: 0;
+      letter-spacing: 0.01em;
     }
 
     .cookie-banner {
@@ -766,8 +873,35 @@
       }
 
       .audio-player {
-        gap: 10px;
-        padding: 12px;
+        grid-template-columns: 48px minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 12px 14px 12px 12px;
+      }
+
+      .play-btn {
+        width: 48px;
+        height: 48px;
+      }
+
+      .play-btn .play-icon,
+      .play-btn .pause-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .wave-shell,
+      .waveform {
+        height: 42px;
+      }
+
+      .waveform {
+        gap: 2px;
+      }
+
+      .wave-head {
+        width: 11px;
+        height: 11px;
+        margin-left: -5.5px;
       }
 
       .cookie-banner {
@@ -1008,9 +1142,26 @@
                 </div>
               </div>
 
-              <div class="audio-player" data-player>
-                <button class="play-btn" type="button">▶</button>
-                <input class="progress" type="range" min="0" max="100" value="0" step="0.1" />
+              <div
+                class="audio-player"
+                data-player
+                data-wave="10,26,18,34,24,44,28,54,32,60,38,72,40,66,34,58,28,48,24,40,30,52,42,68,48,74,44,64,36,56,30,46,26,38"
+              >
+                <button class="play-btn" type="button" aria-label="Reproduzir áudio">
+                  <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M8 5.8v12.4c0 .7.8 1.2 1.5.8l9.7-6.2c.6-.4.6-1.2 0-1.6L9.5 5c-.7-.4-1.5.1-1.5.8z"/>
+                  </svg>
+                  <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/>
+                  </svg>
+                </button>
+
+                <div class="wave-shell">
+                  <div class="waveform" aria-hidden="true"></div>
+                  <div class="wave-head" aria-hidden="true"></div>
+                  <input class="wave-button" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posição do áudio" />
+                </div>
+
                 <span class="time">0:00</span>
                 <audio preload="metadata" src="chesil-fishing.m4a"></audio>
               </div>
@@ -1041,9 +1192,26 @@
                 </div>
               </div>
 
-              <div class="audio-player" data-player>
-                <button class="play-btn" type="button">▶</button>
-                <input class="progress" type="range" min="0" max="100" value="0" step="0.1" />
+              <div
+                class="audio-player"
+                data-player
+                data-wave="12,22,30,18,26,36,44,30,24,38,52,62,48,40,34,46,58,70,54,42,32,50,64,76,60,48,36,28,34,44,52,40,30,20"
+              >
+                <button class="play-btn" type="button" aria-label="Reproduzir áudio">
+                  <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M8 5.8v12.4c0 .7.8 1.2 1.5.8l9.7-6.2c.6-.4.6-1.2 0-1.6L9.5 5c-.7-.4-1.5.1-1.5.8z"/>
+                  </svg>
+                  <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/>
+                  </svg>
+                </button>
+
+                <div class="wave-shell">
+                  <div class="waveform" aria-hidden="true"></div>
+                  <div class="wave-head" aria-hidden="true"></div>
+                  <input class="wave-button" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posição do áudio" />
+                </div>
+
                 <span class="time">0:00</span>
                 <audio preload="metadata" src="entre-risos.m4a"></audio>
               </div>
@@ -1193,57 +1361,130 @@
       if (cookieDecline) cookieDecline.addEventListener('click', declineCookies);
     }
 
+    function formatTime(value) {
+      if (!isFinite(value)) return '0:00';
+      const minutes = Math.floor(value / 60);
+      const seconds = Math.floor(value % 60).toString().padStart(2, '0');
+      return `${minutes}:${seconds}`;
+    }
+
+    function buildWaveform(player) {
+      const waveform = player.querySelector('.waveform');
+      const values = (player.dataset.wave || '')
+        .split(',')
+        .map(v => Number(v.trim()))
+        .filter(v => Number.isFinite(v) && v > 0);
+
+      waveform.innerHTML = '';
+
+      const fallback = [12, 18, 28, 22, 34, 46, 38, 24, 30, 52, 44, 60, 48, 36, 26, 20, 32, 42, 30, 18];
+
+      (values.length ? values : fallback).forEach((value) => {
+        const bar = document.createElement('span');
+        bar.className = 'bar';
+        bar.style.height = `${Math.max(8, Math.min(76, value))}%`;
+        waveform.appendChild(bar);
+      });
+    }
+
+    function updateWaveVisual(player, percent) {
+      const bars = player.querySelectorAll('.bar');
+      const head = player.querySelector('.wave-head');
+      const clamped = Math.max(0, Math.min(100, percent));
+
+      bars.forEach((bar, index) => {
+        const threshold = ((index + 1) / bars.length) * 100;
+        bar.classList.toggle('is-active', threshold <= clamped);
+      });
+
+      if (head) {
+        head.style.left = `${clamped}%`;
+      }
+    }
+
+    function resetOtherPlayers(players, currentAudio) {
+      players.forEach((otherPlayer) => {
+        const otherAudio = otherPlayer.querySelector('audio');
+        const otherSlider = otherPlayer.querySelector('.wave-button');
+        const otherTime = otherPlayer.querySelector('.time');
+
+        if (otherAudio !== currentAudio) {
+          otherAudio.pause();
+          otherPlayer.classList.remove('is-playing');
+        }
+
+        if (otherAudio !== currentAudio && otherSlider && otherTime && !otherAudio.currentTime) {
+          otherSlider.value = 0;
+          otherTime.textContent = '0:00';
+          updateWaveVisual(otherPlayer, 0);
+        }
+      });
+    }
+
     function setupPlayers() {
       const players = document.querySelectorAll('[data-player]');
 
       players.forEach((player) => {
+        buildWaveform(player);
+
         const audio = player.querySelector('audio');
         const button = player.querySelector('.play-btn');
-        const progress = player.querySelector('.progress');
+        const slider = player.querySelector('.wave-button');
         const time = player.querySelector('.time');
 
-        function formatTime(value) {
-          if (!isFinite(value)) return '0:00';
-          const minutes = Math.floor(value / 60);
-          const seconds = Math.floor(value % 60).toString().padStart(2, '0');
-          return `${minutes}:${seconds}`;
-        }
+        updateWaveVisual(player, 0);
 
-        button.addEventListener('click', () => {
-          players.forEach((otherPlayer) => {
-            const otherAudio = otherPlayer.querySelector('audio');
-            const otherButton = otherPlayer.querySelector('.play-btn');
-            if (otherAudio !== audio) {
-              otherAudio.pause();
-              otherButton.textContent = '▶';
-            }
-          });
+        button.addEventListener('click', async () => {
+          resetOtherPlayers(players, audio);
 
           if (audio.paused) {
-            audio.play();
-            button.textContent = '❚❚';
+            try {
+              await audio.play();
+              player.classList.add('is-playing');
+            } catch (error) {
+              player.classList.remove('is-playing');
+            }
           } else {
             audio.pause();
-            button.textContent = '▶';
+            player.classList.remove('is-playing');
           }
+        });
+
+        audio.addEventListener('play', () => {
+          player.classList.add('is-playing');
+        });
+
+        audio.addEventListener('pause', () => {
+          player.classList.remove('is-playing');
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+          time.textContent = formatTime(0);
+          slider.value = 0;
+          updateWaveVisual(player, 0);
         });
 
         audio.addEventListener('timeupdate', () => {
-          if (audio.duration) {
-            progress.value = (audio.currentTime / audio.duration) * 100;
-          } else {
-            progress.value = 0;
-          }
+          const progress = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+          slider.value = progress;
           time.textContent = formatTime(audio.currentTime);
+          updateWaveVisual(player, progress);
         });
 
         audio.addEventListener('ended', () => {
-          button.textContent = '▶';
+          player.classList.remove('is-playing');
+          slider.value = 0;
+          time.textContent = '0:00';
+          updateWaveVisual(player, 0);
         });
 
-        progress.addEventListener('input', () => {
+        slider.addEventListener('input', () => {
+          const progress = Number(slider.value) || 0;
+          updateWaveVisual(player, progress);
+
           if (audio.duration) {
-            audio.currentTime = (progress.value / 100) * audio.duration;
+            audio.currentTime = (progress / 100) * audio.duration;
+            time.textContent = formatTime(audio.currentTime);
           }
         });
       });
