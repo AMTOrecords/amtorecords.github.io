@@ -87,8 +87,8 @@
       color: inherit;
     }
 
-    .pt { display: inline; }
-    .en { display: none; }
+    .lang-pt .en { display: none !important; }
+    .lang-en .pt { display: none !important; }
 
     :focus-visible {
       outline: 2px solid var(--focus);
@@ -267,7 +267,8 @@
     }
 
     .origin-card,
-    .process-card {
+    .process-card,
+    .memorial-card {
       position: relative;
       overflow: hidden;
       border-radius: 34px;
@@ -283,7 +284,8 @@
     }
 
     .origin-card::before,
-    .process-card::before {
+    .process-card::before,
+    .memorial-card::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -305,15 +307,29 @@
           rgba(0,0,0,0.22) 100%);
     }
 
+    .memorial-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 24% 32%, rgba(255,255,255,0.055), transparent 26%),
+        radial-gradient(circle at 72% 70%, rgba(255,255,255,0.035), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.018), transparent 35%, rgba(255,255,255,0.012));
+      opacity: 0.9;
+    }
+
     .origin-inner,
-    .process-inner {
+    .process-inner,
+    .memorial-inner {
       position: relative;
       z-index: 1;
       padding: 42px 28px;
     }
 
     .origin-copy p,
-    .process-copy p {
+    .process-copy p,
+    .memorial-copy p {
       margin: 0 0 18px;
       color: rgba(255,255,255,0.82);
       font-size: 15px;
@@ -322,17 +338,27 @@
     }
 
     .origin-copy p:last-child,
-    .process-copy p:last-child {
+    .process-copy p:last-child,
+    .memorial-copy p:last-child {
       margin-bottom: 0;
     }
 
-    .process-card h2 {
+    .process-card h2,
+    .memorial-card h2 {
       margin: 0 0 18px;
       font-size: clamp(30px, 4vw, 44px);
       font-weight: 600;
       line-height: 1.04;
       letter-spacing: -0.03em;
       text-wrap: balance;
+    }
+
+    .memory-title {
+      margin: 0 0 12px;
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
     }
 
     .process-quote {
@@ -382,6 +408,79 @@
     .button.primary:hover,
     .button.primary:active {
       background: rgba(255,255,255,0.92);
+    }
+
+    .audio-player {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 14px 14px 12px;
+      margin-top: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.34);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .play-btn {
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover,
+    .play-btn:active {
+      transform: scale(1.04);
+      background: rgba(255,255,255,0.18);
+    }
+
+    .progress {
+      flex: 1;
+      appearance: none;
+      -webkit-appearance: none;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      outline: none;
+    }
+
+    .progress::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .progress::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .time {
+      min-width: 38px;
+      text-align: right;
+      font-size: 12px;
+      color: rgba(255,255,255,0.62);
+      flex-shrink: 0;
     }
 
     .cookie-banner {
@@ -443,7 +542,8 @@
 
     @media (min-width: 1024px) {
       .origin-inner,
-      .process-inner {
+      .process-inner,
+      .memorial-inner {
         padding: 54px 46px;
       }
     }
@@ -479,7 +579,8 @@
       }
 
       .origin-inner,
-      .process-inner {
+      .process-inner,
+      .memorial-inner {
         padding: 32px 20px;
       }
 
@@ -497,6 +598,11 @@
       .back-link {
         min-width: 74px;
         padding: 9px 12px;
+      }
+
+      .audio-player {
+        gap: 10px;
+        padding: 12px;
       }
 
       .cookie-banner {
@@ -589,8 +695,8 @@
         </p>
 
         <h1 class="page-title">
-          <span class="pt">O nome por trás da AMTO Records</span>
-          <span class="en">The name behind AMTO Records</span>
+          <span class="pt">A origem de AMTO Records</span>
+          <span class="en">The origin of AMTO Records</span>
         </h1>
 
         <p class="page-intro">
@@ -607,38 +713,40 @@
       <section class="section">
         <article class="origin-card">
           <div class="origin-inner">
-            <div class="origin-copy pt">
-              <p>O nome nasce das iniciais do meu pai.</p>
-              <p>Mas este projeto nunca foi apenas sobre um nome.</p>
-              <p>Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece. Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.</p>
-              <p>Há uma espécie de permanência nisso. Uma forma discreta de imortalidade.</p>
-              <p>Eu nunca vou esquecer o meu pai. Não preciso disto para o lembrar.</p>
-              <p>Isto existe para que ele não seja esquecido.</p>
-              <p>Para que o nome dele continue presente — não só na memória, mas em algo que pode ser encontrado, ouvido e sentido… muito depois de eu já cá não estar.</p>
-              <p>Há histórias aqui. Momentos. Fragmentos de uma vida que marcou.</p>
-              <p>Algumas são para quem o conheceu. Outras são para quem nunca teve essa oportunidade.</p>
-              <p>A minha sobrinha nasceu apenas três meses antes de ele partir. Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.</p>
-              <p>E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir — e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.</p>
-              <p>Porque a música transporta mais do que memória. Transporta presença.</p>
-              <p>Esta é a minha forma de o honrar.</p>
-              <p>E de garantir que, de alguma forma… ele permanece.</p>
-            </div>
+            <div class="origin-copy">
+              <div class="pt">
+                <p>O nome nasce das iniciais do meu pai.</p>
+                <p>Mas este projeto nunca foi apenas sobre um nome.</p>
+                <p>Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece. Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.</p>
+                <p>Há uma espécie de permanência nisso. Uma forma discreta de imortalidade.</p>
+                <p>Eu nunca vou esquecer o meu pai. Não preciso disto para o lembrar.</p>
+                <p>Isto existe para que ele não seja esquecido.</p>
+                <p>Para que o nome dele continue presente — não só na memória, mas em algo que pode ser encontrado, ouvido e sentido… muito depois de eu já cá não estar.</p>
+                <p>Há histórias aqui. Momentos. Fragmentos de uma vida que marcou.</p>
+                <p>Algumas são para quem o conheceu. Outras são para quem nunca teve essa oportunidade.</p>
+                <p>A minha sobrinha nasceu apenas três meses antes de ele partir. Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.</p>
+                <p>E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir — e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.</p>
+                <p>Porque a música transporta mais do que memória. Transporta presença.</p>
+                <p>Esta é a minha forma de o honrar.</p>
+                <p>E de garantir que, de alguma forma… ele permanece.</p>
+              </div>
 
-            <div class="origin-copy en">
-              <p>The name comes from my father’s initials.</p>
-              <p>But this project was never only about a name.</p>
-              <p>Over the years, through music, I began to understand that what we create does not disappear. Even after we are gone, something remains — in sound, in titles, in the silent marks we leave behind.</p>
-              <p>There is a kind of permanence in that. A quiet form of immortality.</p>
-              <p>I will never forget my father. I do not need this to remember him.</p>
-              <p>This exists so that he is not forgotten.</p>
-              <p>So that his name continues to remain present — not only in memory, but in something that can still be found, heard, and felt… long after I am no longer here.</p>
-              <p>There are stories here. Moments. Fragments of a life that left a mark.</p>
-              <p>Some are for those who knew him. Others are for those who never had that chance.</p>
-              <p>My niece was born just three months before he passed away. He held her in his arms… but she will never remember him.</p>
-              <p>And one day, when she is older, she will be able to come here — listen, feel — and know him in a way words alone could never fully give.</p>
-              <p>Because music carries more than memory. It carries presence.</p>
-              <p>This is my way of honouring him.</p>
-              <p>And of making sure that, somehow… he remains.</p>
+              <div class="en">
+                <p>The name comes from my father’s initials.</p>
+                <p>But this project was never only about a name.</p>
+                <p>Over the years, through music, I began to understand that what we create does not disappear. Even after we are gone, something remains — in sound, in titles, in the silent marks we leave behind.</p>
+                <p>There is a kind of permanence in that. A quiet form of immortality.</p>
+                <p>I will never forget my father. I do not need this to remember him.</p>
+                <p>This exists so that he is not forgotten.</p>
+                <p>So that his name continues to remain present — not only in memory, but in something that can still be found, heard, and felt… long after I am no longer here.</p>
+                <p>There are stories here. Moments. Fragments of a life that left a mark.</p>
+                <p>Some are for those who knew him. Others are for those who never had that chance.</p>
+                <p>My niece was born just three months before he passed away. He held her in his arms… but she will never remember him.</p>
+                <p>And one day, when she is older, she will be able to come here — listen, feel — and know him in a way words alone could never fully give.</p>
+                <p>Because music carries more than memory. It carries presence.</p>
+                <p>This is my way of honouring him.</p>
+                <p>And of making sure that, somehow… he remains.</p>
+              </div>
             </div>
 
             <div class="button-row">
@@ -660,16 +768,70 @@
             </h2>
 
             <div class="process-copy">
-  <p>A AMTO Records começou na memória. Em momentos que ficaram, em conversas que permanecem, e em sentimentos que nunca chegaram verdadeiramente a partir.</p>
-  <p>Cada lançamento começa com algo real — um momento, um sentimento que ficou.</p>
-  <p>As letras vêm de vivências reais — de memórias verdadeiras.</p>
-  <p>Transformar essas memórias em música nem sempre é simples. Nem sempre existe uma forma tradicional de dar expressão exata ao que algo nos fez sentir.</p>
-  <p>Por isso, uso as ferramentas que tenho ao meu alcance.</p>
-  <p>Isso inclui ferramentas de produção modernas, como a criação musical assistida por IA. Essas ferramentas ajudam a dar forma ao som, mas não criam o significado.</p>
-  <p class="process-quote">As memórias, a saudade, o amor, a dor, o luto, o conceito, as palavras… tudo isso é humano.</p>
-  <p>Isto não se trata de substituir a arte — trata-se de usar novas ferramentas para dar expressão a algo humano.</p>
-  <p>O amor não desaparece. Apenas muda de forma.</p>
-</div>
+              <div class="pt">
+                <p>A AMTO Records começou na memória. Em momentos que ficaram, em conversas que permanecem, e em sentimentos que nunca chegaram verdadeiramente a partir.</p>
+                <p>Cada lançamento começa com algo real — um momento, um sentimento que ficou.</p>
+                <p>As letras vêm de vivências reais — de memórias verdadeiras.</p>
+                <p>Transformar essas memórias em música nem sempre é simples. Nem sempre existe uma forma tradicional de dar expressão exata ao que algo nos fez sentir.</p>
+                <p>Por isso, uso as ferramentas que tenho ao meu alcance.</p>
+                <p>Isso inclui ferramentas de produção modernas, como a criação musical assistida por IA. Essas ferramentas ajudam a dar forma ao som, mas não criam o significado.</p>
+                <p class="process-quote">As memórias, a saudade, o amor, a dor, o luto, o conceito, as palavras… tudo isso é humano.</p>
+                <p>Isto não se trata de substituir a arte — trata-se de usar novas ferramentas para dar expressão a algo humano.</p>
+                <p>O amor não desaparece. Apenas muda de forma.</p>
+              </div>
+
+              <div class="en">
+                <p>AMTO Records started in memory. In moments that stayed, in conversations that remained, and in feelings that never truly left.</p>
+                <p>Every release begins with something real — a moment, a feeling that stayed.</p>
+                <p>The lyrics come from lived experience — from real memories.</p>
+                <p>Turning those memories into music is not always simple. There is not always a traditional way to express exactly what something felt like.</p>
+                <p>So I use the tools I have available to me.</p>
+                <p>That includes modern production tools, such as AI-assisted music creation. These tools help shape the sound, but they do not create the meaning.</p>
+                <p class="process-quote">The memories, the longing, the love, the pain, the grief, the concept, the words… all of that is human.</p>
+                <p>This is not about replacing artistry — it is about using new tools to express something human.</p>
+                <p>Love does not disappear. It simply changes shape.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="memorial-card">
+          <div class="memorial-inner">
+            <p class="eyebrow">
+              <span class="pt">Memorial</span>
+              <span class="en">Memorial</span>
+            </p>
+
+            <h2>
+              <span class="pt">Memorial</span>
+              <span class="en">Memorial</span>
+            </h2>
+
+            <div class="memorial-copy">
+              <h3 class="memory-title">
+                <span class="pt">Na praia de Chesil</span>
+                <span class="en">Chesil Beach</span>
+              </h3>
+
+              <div class="pt">
+                <p>Estava a pescar na praia de Chesil quando lhe enviei uma fotografia minha lá.</p>
+                <p>Esta foi a resposta dele.</p>
+              </div>
+
+              <div class="en">
+                <p>I was fishing at Chesil Beach when I sent him a photo of me there.</p>
+                <p>This was his reply.</p>
+              </div>
+            </div>
+
+            <div class="audio-player" data-player>
+              <button class="play-btn" type="button" aria-label="Play audio">▶</button>
+              <input class="progress" type="range" min="0" max="100" value="0" step="0.1" />
+              <span class="time">0:00</span>
+              <audio preload="metadata" src="chesil-fishing.m4a"></audio>
+            </div>
           </div>
         </article>
       </section>
@@ -722,21 +884,18 @@
 
     function applyLang(lang) {
       currentLang = lang === 'en' ? 'en' : 'pt';
+
       root.lang = currentLang;
-
-      document.querySelectorAll('.pt').forEach(el => {
-        el.style.display = currentLang === 'pt' ? '' : 'none';
-      });
-
-      document.querySelectorAll('.en').forEach(el => {
-        el.style.display = currentLang === 'en' ? '' : 'none';
-      });
+      root.classList.remove('lang-pt', 'lang-en');
+      root.classList.add(currentLang === 'pt' ? 'lang-pt' : 'lang-en');
 
       if (langToggle) {
         langToggle.setAttribute('aria-pressed', currentLang === 'en' ? 'true' : 'false');
         langToggle.setAttribute(
           'aria-label',
-          currentLang === 'pt' ? 'Mudar idioma para inglês' : 'Switch language to Portuguese'
+          currentLang === 'pt'
+            ? 'Mudar idioma para inglês'
+            : 'Switch language to Portuguese'
         );
       }
 
@@ -795,10 +954,71 @@
       if (cookieDecline) cookieDecline.addEventListener('click', declineCookies);
     }
 
+    function setupPlayers() {
+      const players = document.querySelectorAll('[data-player]');
+
+      players.forEach((player) => {
+        const audio = player.querySelector('audio');
+        const button = player.querySelector('.play-btn');
+        const progress = player.querySelector('.progress');
+        const time = player.querySelector('.time');
+
+        function formatTime(value) {
+          if (!isFinite(value)) return '0:00';
+          const minutes = Math.floor(value / 60);
+          const seconds = Math.floor(value % 60).toString().padStart(2, '0');
+          return `${minutes}:${seconds}`;
+        }
+
+        button.addEventListener('click', () => {
+          players.forEach((otherPlayer) => {
+            const otherAudio = otherPlayer.querySelector('audio');
+            const otherButton = otherPlayer.querySelector('.play-btn');
+            if (otherAudio !== audio) {
+              otherAudio.pause();
+              otherButton.textContent = '▶';
+            }
+          });
+
+          if (audio.paused) {
+            audio.play();
+            button.textContent = '❚❚';
+          } else {
+            audio.pause();
+            button.textContent = '▶';
+          }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+          if (audio.duration) {
+            progress.value = (audio.currentTime / audio.duration) * 100;
+          } else {
+            progress.value = 0;
+          }
+          time.textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('ended', () => {
+          button.textContent = '▶';
+        });
+
+        progress.addEventListener('input', () => {
+          if (audio.duration) {
+            audio.currentTime = (progress.value / 100) * audio.duration;
+          }
+        });
+      });
+    }
+
     currentLang = getInitialLang();
     applyLang(currentLang);
-    if (langToggle) langToggle.addEventListener('click', toggleLang);
+
+    if (langToggle) {
+      langToggle.addEventListener('click', toggleLang);
+    }
+
     setupConsent();
+    setupPlayers();
 
     if (!prefersReducedMotion && 'IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
