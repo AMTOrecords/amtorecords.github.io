@@ -29,10 +29,9 @@
       --soft: rgba(255,255,255,0.56);
       --border: rgba(255,255,255,0.10);
       --border-strong: rgba(255,255,255,0.18);
-      --glass: rgba(0,0,0,0.38);
+      --glass: rgba(0,0,0,0.42);
       --shadow: 0 24px 70px rgba(0,0,0,0.42);
-      --shadow-soft: 0 18px 40px rgba(0,0,0,0.28);
-      --radius: 28px;
+      --shadow-soft: 0 20px 55px rgba(0,0,0,0.34);
       --container: 1180px;
       --bottom-ui: calc(92px + env(safe-area-inset-bottom));
       --focus: rgba(255,255,255,0.96);
@@ -50,16 +49,30 @@
     body {
       margin: 0;
       min-width: 320px;
-      background: #000;
       color: var(--text);
       font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(255,255,255,0.05), transparent 30%),
+        radial-gradient(circle at 78% 72%, rgba(255,255,255,0.035), transparent 28%),
+        linear-gradient(180deg, #020202 0%, #000 34%, #030303 100%);
     }
 
-    img, video {
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%, transparent 80%, rgba(255,255,255,0.01)),
+        radial-gradient(circle at center, rgba(255,255,255,0.015), transparent 52%);
+    }
+
+    img {
       display: block;
       max-width: 100%;
     }
@@ -99,47 +112,9 @@
       top: 14px;
     }
 
-    .video-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -5;
-      overflow: hidden;
-      background: #000;
-      pointer-events: none;
-    }
-
-    .video-bg video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: none !important;
-      filter: none !important;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
-    .video-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: -4;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at center, rgba(255,255,255,0.02), transparent 48%),
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,0.16) 0%,
-          rgba(0,0,0,0.12) 24%,
-          rgba(0,0,0,0.18) 56%,
-          rgba(0,0,0,0.34) 80%,
-          rgba(0,0,0,0.48) 100%
-        );
-    }
-
     .topbar {
       position: fixed;
-      top: max(14px, env(safe-area-inset-top));
+      top: max(10px, env(safe-area-inset-top));
       right: max(14px, env(safe-area-inset-right));
       z-index: 50;
       display: flex;
@@ -165,6 +140,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
     }
 
     .lang-toggle:hover,
@@ -179,7 +155,7 @@
     .social-wrap {
       position: fixed;
       left: 50%;
-      bottom: max(18px, env(safe-area-inset-bottom));
+      bottom: max(10px, env(safe-area-inset-bottom));
       transform: translateX(-50%);
       z-index: 46;
       max-width: calc(100vw - 24px);
@@ -233,15 +209,14 @@
 
     .content {
       position: relative;
-      z-index: 2;
       width: 100%;
       max-width: var(--container);
       margin: 0 auto;
-      padding: 42px 20px calc(var(--bottom-ui) + 40px);
+      padding: 42px 20px calc(var(--bottom-ui) + 52px);
     }
 
     .section {
-      margin-bottom: clamp(42px, 6vw, 72px);
+      margin-bottom: clamp(34px, 5vw, 56px);
       opacity: 0;
       transform: translateY(18px);
       transition: opacity 0.7s ease, transform 0.7s ease;
@@ -253,8 +228,8 @@
     }
 
     .page-hero {
-      padding-top: clamp(52px, 7vw, 90px);
-      margin-bottom: 26px;
+      padding-top: clamp(90px, 12vw, 140px);
+      margin-bottom: 22px;
     }
 
     .eyebrow {
@@ -267,10 +242,11 @@
 
     .page-title {
       margin: 0 0 16px;
-      font-size: clamp(38px, 5vw, 64px);
+      max-width: 900px;
+      font-size: clamp(42px, 6vw, 76px);
       font-weight: 600;
-      line-height: 0.96;
-      letter-spacing: -0.045em;
+      line-height: 0.94;
+      letter-spacing: -0.05em;
       text-wrap: balance;
     }
 
@@ -279,8 +255,15 @@
       max-width: 760px;
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.8;
+      line-height: 1.82;
       text-wrap: balance;
+    }
+
+    .origin-name {
+      margin: 22px 0 0;
+      color: rgba(255,255,255,0.90);
+      font-size: 15px;
+      line-height: 1.75;
     }
 
     .origin-card,
@@ -293,6 +276,10 @@
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+    }
+
+    .origin-card {
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
     }
 
     .origin-card::before,
@@ -313,8 +300,8 @@
       pointer-events: none;
       background:
         linear-gradient(90deg,
-          rgba(0,0,0,0.70) 0%,
-          rgba(0,0,0,0.46) 45%,
+          rgba(0,0,0,0.74) 0%,
+          rgba(0,0,0,0.48) 44%,
           rgba(0,0,0,0.22) 100%);
     }
 
@@ -323,12 +310,6 @@
       position: relative;
       z-index: 1;
       padding: 42px 28px;
-    }
-
-    .origin-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 26px;
     }
 
     .origin-copy p,
@@ -558,14 +539,6 @@
     <span class="en">Skip to content</span>
   </a>
 
-  <div class="video-bg" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="metadata" poster="love-you-bye-cover.jpg">
-      <source src="lv_0_20260320192328.mp4" type="video/mp4" />
-    </video>
-  </div>
-
-  <div class="video-overlay" aria-hidden="true"></div>
-
   <div class="topbar">
     <a href="index.html" class="back-link">
       <span class="pt">Voltar</span>
@@ -624,45 +597,48 @@
           <span class="pt">Um espaço construído a partir da memória, da presença e daquilo que continua, mesmo depois da ausência.</span>
           <span class="en">A space built from memory, presence, and what continues to remain even after absence.</span>
         </p>
+
+        <p class="origin-name">
+          <span class="pt">AMTO Records — Artur Miguel Teixeira Oliveira.</span>
+          <span class="en">AMTO Records — Artur Miguel Teixeira Oliveira.</span>
+        </p>
       </section>
 
       <section class="section">
         <article class="origin-card">
           <div class="origin-inner">
-            <div class="origin-grid">
-              <div class="origin-copy pt">
-                <p>O nome nasce das iniciais do meu pai.</p>
-                <p>Mas este projeto nunca foi apenas sobre um nome.</p>
-                <p>Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece. Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.</p>
-                <p>Há uma espécie de permanência nisso. Uma forma discreta de imortalidade.</p>
-                <p>Eu nunca vou esquecer o meu pai. Não preciso disto para o lembrar.</p>
-                <p>Isto existe para que ele não seja esquecido.</p>
-                <p>Para que o nome dele continue presente — não só na memória, mas em algo que pode ser encontrado, ouvido e sentido… muito depois de eu já cá não estar.</p>
-                <p>Há histórias aqui. Momentos. Fragmentos de uma vida que marcou.</p>
-                <p>Algumas são para quem o conheceu. Outras são para quem nunca teve essa oportunidade.</p>
-                <p>A minha sobrinha nasceu apenas três meses antes de ele partir. Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.</p>
-                <p>E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir — e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.</p>
-                <p>Porque a música transporta mais do que memória. Transporta presença.</p>
-                <p>Esta é a minha forma de o honrar.</p>
-                <p>E de garantir que, de alguma forma… ele permanece.</p>
-              </div>
+            <div class="origin-copy pt">
+              <p>O nome nasce das iniciais do meu pai.</p>
+              <p>Mas este projeto nunca foi apenas sobre um nome.</p>
+              <p>Ao longo dos anos, através da música, fui percebendo que aquilo que criamos não desaparece. Mesmo depois de partirmos, fica — no som, nos títulos, nas marcas silenciosas que deixamos.</p>
+              <p>Há uma espécie de permanência nisso. Uma forma discreta de imortalidade.</p>
+              <p>Eu nunca vou esquecer o meu pai. Não preciso disto para o lembrar.</p>
+              <p>Isto existe para que ele não seja esquecido.</p>
+              <p>Para que o nome dele continue presente — não só na memória, mas em algo que pode ser encontrado, ouvido e sentido… muito depois de eu já cá não estar.</p>
+              <p>Há histórias aqui. Momentos. Fragmentos de uma vida que marcou.</p>
+              <p>Algumas são para quem o conheceu. Outras são para quem nunca teve essa oportunidade.</p>
+              <p>A minha sobrinha nasceu apenas três meses antes de ele partir. Ele chegou a pegá-la ao colo… mas ela nunca se vai lembrar dele.</p>
+              <p>E um dia, quando for mais velha, vai poder vir aqui — ouvir, sentir — e conhecê-lo de uma forma que as palavras nunca seriam suficientes para dar.</p>
+              <p>Porque a música transporta mais do que memória. Transporta presença.</p>
+              <p>Esta é a minha forma de o honrar.</p>
+              <p>E de garantir que, de alguma forma… ele permanece.</p>
+            </div>
 
-              <div class="origin-copy en">
-                <p>The name comes from my father’s initials.</p>
-                <p>But this project was never only about a name.</p>
-                <p>Over the years, through music, I began to understand that what we create does not disappear. Even after we are gone, something remains — in sound, in titles, in the silent marks we leave behind.</p>
-                <p>There is a kind of permanence in that. A quiet form of immortality.</p>
-                <p>I will never forget my father. I do not need this to remember him.</p>
-                <p>This exists so that he is not forgotten.</p>
-                <p>So that his name continues to remain present — not only in memory, but in something that can still be found, heard, and felt… long after I am no longer here.</p>
-                <p>There are stories here. Moments. Fragments of a life that left a mark.</p>
-                <p>Some are for those who knew him. Others are for those who never had that chance.</p>
-                <p>My niece was born just three months before he passed away. He held her in his arms… but she will never remember him.</p>
-                <p>And one day, when she is older, she will be able to come here — listen, feel — and know him in a way words alone could never fully give.</p>
-                <p>Because music carries more than memory. It carries presence.</p>
-                <p>This is my way of honouring him.</p>
-                <p>And of making sure that, somehow… he remains.</p>
-              </div>
+            <div class="origin-copy en">
+              <p>The name comes from my father’s initials.</p>
+              <p>But this project was never only about a name.</p>
+              <p>Over the years, through music, I began to understand that what we create does not disappear. Even after we are gone, something remains — in sound, in titles, in the silent marks we leave behind.</p>
+              <p>There is a kind of permanence in that. A quiet form of immortality.</p>
+              <p>I will never forget my father. I do not need this to remember him.</p>
+              <p>This exists so that he is not forgotten.</p>
+              <p>So that his name continues to remain present — not only in memory, but in something that can still be found, heard, and felt… long after I am no longer here.</p>
+              <p>There are stories here. Moments. Fragments of a life that left a mark.</p>
+              <p>Some are for those who knew him. Others are for those who never had that chance.</p>
+              <p>My niece was born just three months before he passed away. He held her in his arms… but she will never remember him.</p>
+              <p>And one day, when she is older, she will be able to come here — listen, feel — and know him in a way words alone could never fully give.</p>
+              <p>Because music carries more than memory. It carries presence.</p>
+              <p>This is my way of honouring him.</p>
+              <p>And of making sure that, somehow… he remains.</p>
             </div>
 
             <div class="button-row">
@@ -683,19 +659,7 @@
               <span class="en">How It’s Made</span>
             </h2>
 
-            <div class="process-copy pt">
-              <p>AMTO Records started with memory. With moments that stayed, conversations that linger, and feelings that never quite left.</p>
-              <p>Every release begins with something real — a moment, a feeling that stayed.</p>
-              <p>The lyrics come from lived experiences — real memories.</p>
-              <p>Turning those memories into music isn’t always straightforward. There isn’t always a traditional way to express what something felt like.</p>
-              <p>So I use the tools available to me.</p>
-              <p>That includes modern production tools, such as AI-assisted music creation. These tools help shape the sound, but they don’t create the meaning.</p>
-              <p class="process-quote">The memories, the longing, the love, the pain, the grief, the concept, the words… these are all human.</p>
-              <p>This isn’t about replacing artistry — it’s about using new tools to express something human.</p>
-              <p>Love doesn’t disappear. It just changes shape.</p>
-            </div>
-
-            <div class="process-copy en">
+            <div class="process-copy">
               <p>AMTO Records started with memory. With moments that stayed, conversations that linger, and feelings that never quite left.</p>
               <p>Every release begins with something real — a moment, a feeling that stayed.</p>
               <p>The lyrics come from lived experiences — real memories.</p>
