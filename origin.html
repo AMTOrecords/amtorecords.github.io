@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <title>Origin | AMTO Records</title>
+  <title>Origem | AMTO Records</title>
   <meta name="description" content="A origem da AMTO Records — memória, presença, legado e a história por trás do nome." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#000000" />
@@ -14,24 +14,36 @@
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AMTO Records" />
-  <meta property="og:title" content="Origin | AMTO Records" />
+  <meta property="og:title" content="Origem | AMTO Records" />
   <meta property="og:description" content="A história por trás do nome, da memória e do legado da AMTO Records." />
   <meta property="og:url" content="https://amtorecords.com/origin.html" />
   <meta property="og:image" content="https://amtorecords.com/love-you-bye-cover.jpg" />
   <meta property="og:image:alt" content="Capa do lançamento Love You Bye" />
   <meta property="og:locale" content="pt_PT" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
     :root {
-      --bg: #000;
-      --text: #fff;
-      --muted: rgba(255,255,255,0.74);
-      --soft: rgba(255,255,255,0.56);
+      --bg: #050607;
+      --bg-soft: #0b0e11;
+      --bg-deep: #06080a;
+      --text: #f4f1ea;
+      --muted: rgba(244, 241, 234, 0.74);
+      --soft: rgba(244, 241, 234, 0.56);
       --border: rgba(255,255,255,0.10);
-      --border-strong: rgba(255,255,255,0.18);
+      --border-strong: rgba(255,255,255,0.16);
       --glass: rgba(0,0,0,0.42);
+      --card: rgba(255,255,255,0.04);
+      --card-strong: rgba(255,255,255,0.06);
       --shadow: 0 24px 70px rgba(0,0,0,0.42);
       --shadow-soft: 0 20px 55px rgba(0,0,0,0.34);
+      --shadow-strong: 0 30px 90px rgba(0,0,0,0.48);
       --container: 1180px;
       --bottom-ui: calc(92px + env(safe-area-inset-bottom));
       --focus: rgba(255,255,255,0.96);
@@ -50,15 +62,15 @@
       margin: 0;
       min-width: 320px;
       color: var(--text);
-      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-family: 'Inter', ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
       background:
-        radial-gradient(circle at 20% 18%, rgba(255,255,255,0.05), transparent 30%),
-        radial-gradient(circle at 78% 72%, rgba(255,255,255,0.035), transparent 28%),
-        linear-gradient(180deg, #020202 0%, #000 34%, #030303 100%);
+        radial-gradient(circle at 20% 16%, rgba(157, 184, 194, 0.08), transparent 28%),
+        radial-gradient(circle at 78% 72%, rgba(255,255,255,0.03), transparent 28%),
+        linear-gradient(180deg, #020304 0%, #060708 34%, #030405 100%);
     }
 
     body::before {
@@ -66,10 +78,18 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: -1;
+      z-index: 0;
+      opacity: 0.05;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%, transparent 80%, rgba(255,255,255,0.01)),
-        radial-gradient(circle at center, rgba(255,255,255,0.015), transparent 52%);
+        linear-gradient(180deg, rgba(255,255,255,0.015), transparent 18%, transparent 82%, rgba(255,255,255,0.01)),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.025) 0,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      mix-blend-mode: soft-light;
     }
 
     img {
@@ -116,7 +136,7 @@
       position: fixed;
       top: max(10px, env(safe-area-inset-top));
       right: max(14px, env(safe-area-inset-right));
-      z-index: 50;
+      z-index: 60;
       display: flex;
       gap: 10px;
       align-items: center;
@@ -129,7 +149,7 @@
       padding: 10px 14px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(0,0,0,0.34);
+      background: rgba(0,0,0,0.36);
       cursor: pointer;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -149,7 +169,7 @@
     .back-link:active {
       transform: translateY(-1px);
       background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.20);
+      border-color: rgba(255,255,255,0.22);
     }
 
     .social-wrap {
@@ -157,7 +177,7 @@
       left: 50%;
       bottom: max(10px, env(safe-area-inset-bottom));
       transform: translateX(-50%);
-      z-index: 46;
+      z-index: 56;
       max-width: calc(100vw - 24px);
     }
 
@@ -205,6 +225,8 @@
       min-height: 100vh;
       min-height: 100svh;
       padding-bottom: var(--bottom-ui);
+      position: relative;
+      z-index: 2;
     }
 
     .content {
@@ -216,7 +238,7 @@
     }
 
     .section {
-      margin-bottom: clamp(34px, 5vw, 56px);
+      margin-bottom: clamp(34px, 5vw, 58px);
       opacity: 0;
       transform: translateY(18px);
       transition: opacity 0.7s ease, transform 0.7s ease;
@@ -228,13 +250,50 @@
     }
 
     .page-hero {
-      padding-top: clamp(90px, 12vw, 140px);
-      margin-bottom: 22px;
+      position: relative;
+      padding-top: clamp(92px, 12vw, 142px);
+      margin-bottom: 26px;
+      min-height: clamp(320px, 54vh, 560px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 38px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow-strong);
+      isolation: isolate;
+    }
+
+    .page-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(5,7,9,0.40), rgba(5,7,9,0.82)),
+        url("chesil-sea.png") center center / cover no-repeat;
+      transform: scale(1.06);
+      filter: blur(3px) saturate(0.88) brightness(0.74);
+      opacity: 0.94;
+      z-index: -2;
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 16%, rgba(185, 205, 214, 0.13), transparent 30%),
+        linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(0,0,0,0.38));
+      z-index: -1;
+    }
+
+    .hero-content {
+      width: 100%;
+      padding: clamp(34px, 5vw, 58px);
     }
 
     .eyebrow {
-      margin: 0 0 10px;
-      color: rgba(255,255,255,0.56);
+      margin: 0 0 12px;
+      color: rgba(255,255,255,0.62);
       font-size: 12px;
       letter-spacing: 1.8px;
       text-transform: uppercase;
@@ -243,9 +302,10 @@
     .page-title {
       margin: 0 0 16px;
       max-width: 900px;
-      font-size: clamp(42px, 6vw, 76px);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 6vw, 78px);
       font-weight: 600;
-      line-height: 0.94;
+      line-height: 0.95;
       letter-spacing: -0.05em;
       text-wrap: balance;
     }
@@ -253,42 +313,41 @@
     .page-intro {
       margin: 0;
       max-width: 760px;
-      color: var(--muted);
+      color: rgba(244,241,234,0.82);
       font-size: 15px;
-      line-height: 1.82;
+      line-height: 1.88;
       text-wrap: balance;
     }
 
     .origin-name {
       margin: 22px 0 0;
-      color: rgba(255,255,255,0.90);
+      color: rgba(255,255,255,0.92);
       font-size: 15px;
       line-height: 1.75;
     }
 
     .origin-card,
     .process-card,
-    .memorial-card {
+    .memorial-card,
+    .closing-card {
       position: relative;
       overflow: hidden;
       border-radius: 34px;
       border: 1px solid var(--border);
       background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
       box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .memorial-card {
-  background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .origin-card {
-      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+      box-shadow: var(--shadow-strong);
     }
 
     .origin-card::before,
     .process-card::before,
-    .memorial-card::before {
+    .memorial-card::before,
+    .closing-card::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -305,47 +364,85 @@
       pointer-events: none;
       background:
         linear-gradient(90deg,
-          rgba(0,0,0,0.74) 0%,
-          rgba(0,0,0,0.48) 44%,
-          rgba(0,0,0,0.22) 100%);
+          rgba(0,0,0,0.76) 0%,
+          rgba(0,0,0,0.52) 44%,
+          rgba(0,0,0,0.24) 100%);
+    }
+
+    .process-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.022));
+    }
+
+    .memorial-card {
+      background: rgba(0,0,0,0.36);
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.36);
     }
 
     .memorial-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('chesil-sea.png') center/cover no-repeat;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("chesil-sea.png") center/cover no-repeat;
+      opacity: 0.18;
+      filter: blur(12px) saturate(0.90);
+      transform: scale(1.08);
+      pointer-events: none;
+    }
 
-  opacity: 0.22;
-  filter: blur(8px);
-  transform: scale(1.08);
+    .memorial-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,0.46) 0%,
+          rgba(0,0,0,0.70) 56%,
+          rgba(0,0,0,0.88) 100%
+        ),
+        radial-gradient(
+          circle at 30% 20%,
+          rgba(255,255,255,0.05),
+          transparent 40%
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.012) 0,
+          rgba(255,255,255,0.012) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+    }
 
-  pointer-events: none;
-}
+    .closing-card {
+      text-align: center;
+      box-shadow: var(--shadow-strong);
+    }
 
-.memorial-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0.55) 0%,
-      rgba(0,0,0,0.75) 60%,
-      rgba(0,0,0,0.92) 100%
-    ),
-    radial-gradient(
-      circle at 30% 20%,
-      rgba(255,255,255,0.06),
-      transparent 40%
-    );
-}
+    .closing-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(190, 212, 220, 0.10), transparent 34%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.012) 0,
+          rgba(255,255,255,0.012) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      opacity: 0.72;
+    }
 
     .origin-inner,
     .process-inner,
-    .memorial-inner {
+    .memorial-inner,
+    .closing-inner {
       position: relative;
       z-index: 1;
       padding: 42px 28px;
@@ -353,7 +450,8 @@
 
     .origin-copy p,
     .process-copy p,
-    .memorial-copy p {
+    .memorial-copy p,
+    .closing-copy p {
       margin: 0 0 18px;
       color: rgba(255,255,255,0.82);
       font-size: 15px;
@@ -363,13 +461,16 @@
 
     .origin-copy p:last-child,
     .process-copy p:last-child,
-    .memorial-copy p:last-child {
+    .memorial-copy p:last-child,
+    .closing-copy p:last-child {
       margin-bottom: 0;
     }
 
     .process-card h2,
-    .memorial-card h2 {
+    .memorial-card h2,
+    .closing-card h2 {
       margin: 0 0 18px;
+      font-family: 'Playfair Display', serif;
       font-size: clamp(30px, 4vw, 44px);
       font-weight: 600;
       line-height: 1.04;
@@ -377,17 +478,45 @@
       text-wrap: balance;
     }
 
-    .memory-title {
-      margin: 0 0 12px;
-      font-size: 26px;
+    .section-head {
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 44px);
       font-weight: 600;
-      line-height: 1.08;
+      line-height: 1.04;
       letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 720px;
+      color: rgba(255,255,255,0.70);
+      font-size: 15px;
+      line-height: 1.8;
     }
 
     .process-quote {
       color: #fff !important;
       opacity: 0.96;
+    }
+
+    .memorial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .memory-title {
+      margin: 0 0 12px;
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
     }
 
     .button-row {
@@ -442,15 +571,17 @@
       margin-top: 22px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.34);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 10px 30px rgba(0,0,0,0.18);
     }
 
     .play-btn {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border: 0;
       border-radius: 999px;
       background: rgba(255,255,255,0.12);
@@ -473,7 +604,7 @@
       flex: 1;
       appearance: none;
       -webkit-appearance: none;
-      height: 4px;
+      height: 5px;
       border-radius: 999px;
       background: rgba(255,255,255,0.14);
       outline: none;
@@ -567,7 +698,8 @@
     @media (min-width: 1024px) {
       .origin-inner,
       .process-inner,
-      .memorial-inner {
+      .memorial-inner,
+      .closing-inner {
         padding: 54px 46px;
       }
     }
@@ -589,6 +721,14 @@
       .topbar {
         right: max(12px, env(safe-area-inset-right));
       }
+
+      .memorial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-hero {
+        min-height: 420px;
+      }
     }
 
     @media (max-width: 560px) {
@@ -604,7 +744,8 @@
 
       .origin-inner,
       .process-inner,
-      .memorial-inner {
+      .memorial-inner,
+      .closing-inner {
         padding: 32px 20px;
       }
 
@@ -640,6 +781,14 @@
 
       .cookie-btn {
         flex: 1;
+      }
+
+      .page-title {
+        font-size: clamp(40px, 12vw, 58px);
+      }
+
+      .section-head h2 {
+        font-size: clamp(28px, 7vw, 36px);
       }
     }
 
@@ -688,7 +837,7 @@
 
   <div class="social-wrap">
     <nav class="socials" aria-label="Social media links">
-      <a href="https://youtube.com/playlist?list=PLya8w-qeqMVzlUGjZovJXTzaHVs7K2HMb&si=jN2VuRprNcHYOmX-" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+      <a href="https://youtube.com/@amtorecords?si=Mf9NjYJ7vuxMFYO0" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.87.58 9.39.58 9.39.58s7.52 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8zM9.75 15.52V8.48L15.98 12l-6.23 3.52z"/></svg>
       </a>
 
@@ -713,25 +862,27 @@
   <div class="page-shell">
     <main class="content" id="main-content">
       <section class="section page-hero">
-        <p class="eyebrow">
-          <span class="pt">A origem</span>
-          <span class="en">The origin</span>
-        </p>
+        <div class="hero-content">
+          <p class="eyebrow">
+            <span class="pt">A origem</span>
+            <span class="en">The origin</span>
+          </p>
 
-        <h1 class="page-title">
-          <span class="pt">A origem de AMTO Records</span>
-          <span class="en">The origin of AMTO Records</span>
-        </h1>
+          <h1 class="page-title">
+            <span class="pt">A origem de AMTO Records</span>
+            <span class="en">The origin of AMTO Records</span>
+          </h1>
 
-        <p class="page-intro">
-          <span class="pt">Um espaço construído a partir da memória, da presença e daquilo que continua, mesmo depois da ausência.</span>
-          <span class="en">A space built from memory, presence, and what continues to remain even after absence.</span>
-        </p>
+          <p class="page-intro">
+            <span class="pt">Um espaço construído a partir da memória, da presença e daquilo que continua, mesmo depois da ausência.</span>
+            <span class="en">A space built from memory, presence, and what continues to remain even after absence.</span>
+          </p>
 
-        <p class="origin-name">
-          <span class="pt">AMTO Records — Artur Miguel Teixeira Oliveira.</span>
-          <span class="en">AMTO Records — Artur Miguel Teixeira Oliveira.</span>
-        </p>
+          <p class="origin-name">
+            <span class="pt">AMTO Records — Artur Miguel Teixeira Oliveira.</span>
+            <span class="en">AMTO Records — Artur Miguel Teixeira Oliveira.</span>
+          </p>
+        </div>
       </section>
 
       <section class="section">
@@ -821,89 +972,108 @@
       </section>
 
       <section class="section" id="memorial" aria-labelledby="memorial-heading">
-  <div class="section-head">
-    <h2 id="memorial-heading">
-      <span class="pt">Memorial</span>
-      <span class="en">Memorial</span>
-    </h2>
-    <p>
-      <span class="pt">Registos de voz, momentos e fragmentos que permanecem.</span>
-      <span class="en">Voice recordings, moments and fragments that remain.</span>
-    </p>
-  </div>
-
-  <div class="memorial-grid">
-
-    <!-- Card 1 -->
-    <article class="memorial-card">
-      <div class="memorial-inner">
-        <p class="eyebrow">
-          <span class="pt">Na praia de Chesil</span>
-          <span class="en">Chesil Beach</span>
-        </p>
-
-        <h3 class="memory-title">
-          <span class="pt">Na praia de Chesil</span>
-          <span class="en">Chesil Beach</span>
-        </h3>
-
-        <div class="memorial-copy">
-          <div class="pt">
-            <p>Estava a pescar na praia de Chesil quando lhe enviei uma fotografia minha lá.</p>
-            <p>Esta foi a resposta dele.</p>
-          </div>
-
-          <div class="en">
-            <p>I was fishing at Chesil Beach when I sent him a photo of me there.</p>
-            <p>This was his reply.</p>
-          </div>
+        <div class="section-head">
+          <h2 id="memorial-heading">
+            <span class="pt">Memorial</span>
+            <span class="en">Memorial</span>
+          </h2>
+          <p>
+            <span class="pt">Registos de voz, momentos e fragmentos que permanecem.</span>
+            <span class="en">Voice recordings, moments and fragments that remain.</span>
+          </p>
         </div>
 
-        <div class="audio-player" data-player>
-          <button class="play-btn" type="button">▶</button>
-          <input class="progress" type="range" min="0" max="100" value="0" step="0.1" />
-          <span class="time">0:00</span>
-          <audio preload="metadata" src="chesil-fishing.m4a"></audio>
+        <div class="memorial-grid">
+          <article class="memorial-card">
+            <div class="memorial-inner">
+              <p class="eyebrow">
+                <span class="pt">Na praia de Chesil</span>
+                <span class="en">Chesil Beach</span>
+              </p>
+
+              <h3 class="memory-title">
+                <span class="pt">Na praia de Chesil</span>
+                <span class="en">Chesil Beach</span>
+              </h3>
+
+              <div class="memorial-copy">
+                <div class="pt">
+                  <p>Estava a pescar na praia de Chesil quando lhe enviei uma fotografia minha lá.</p>
+                  <p>Esta foi a resposta dele.</p>
+                </div>
+
+                <div class="en">
+                  <p>I was fishing at Chesil Beach when I sent him a photo of me there.</p>
+                  <p>This was his reply.</p>
+                </div>
+              </div>
+
+              <div class="audio-player" data-player>
+                <button class="play-btn" type="button">▶</button>
+                <input class="progress" type="range" min="0" max="100" value="0" step="0.1" />
+                <span class="time">0:00</span>
+                <audio preload="metadata" src="chesil-fishing.m4a"></audio>
+              </div>
+            </div>
+          </article>
+
+          <article class="memorial-card">
+            <div class="memorial-inner">
+              <p class="eyebrow">
+                <span class="pt">Entre risos</span>
+                <span class="en">Between laughter</span>
+              </p>
+
+              <h3 class="memory-title">
+                <span class="pt">Entre risos</span>
+                <span class="en">Between laughter</span>
+              </h3>
+
+              <div class="memorial-copy">
+                <div class="pt">
+                  <p>Esta gravação mostra um momento leve — a forma como ele falava, com humor e naturalidade.</p>
+                  <p>Foi enviada numa mensagem pelo Facebook Messenger.</p>
+                </div>
+
+                <div class="en">
+                  <p>This recording captures a lighter moment — the way he spoke, with humour and ease.</p>
+                  <p>It was sent in a Facebook Messenger message.</p>
+                </div>
+              </div>
+
+              <div class="audio-player" data-player>
+                <button class="play-btn" type="button">▶</button>
+                <input class="progress" type="range" min="0" max="100" value="0" step="0.1" />
+                <span class="time">0:00</span>
+                <audio preload="metadata" src="entre-risos.m4a"></audio>
+              </div>
+            </div>
+          </article>
         </div>
-      </div>
-    </article>
+      </section>
 
-    <!-- Card 2 -->
-    <article class="memorial-card">
-      <div class="memorial-inner">
-        <p class="eyebrow">
-          <span class="pt">Entre risos</span>
-          <span class="en">Between laughter</span>
-        </p>
+      <section class="section">
+        <article class="closing-card">
+          <div class="closing-inner">
+            <h2>
+              <span class="pt">O que permanece é humano</span>
+              <span class="en">What remains is human</span>
+            </h2>
 
-        <h3 class="memory-title">
-          <span class="pt">Entre risos</span>
-          <span class="en">Between laughter</span>
-        </h3>
+            <div class="closing-copy">
+              <div class="pt">
+                <p>A memória, a saudade, o amor, a dor, o conceito e as palavras — isso continua a ser profundamente humano.</p>
+                <p>Isto não é sobre substituir arte. É sobre usar novas ferramentas para expressar algo real. Algo sentido. Algo que permanece.</p>
+              </div>
 
-        <div class="memorial-copy">
-          <div class="pt">
-            <p>Esta gravação mostra um momento leve — a forma como ele falava, com humor e naturalidade.</p>
-            <p>Foi enviada numa mensagem pelo Facebook Messenger.</p>
+              <div class="en">
+                <p>Memory, longing, love, pain, the concept and the words — all of that remains deeply human.</p>
+                <p>This is not about replacing art. It is about using new tools to express something real. Something felt. Something that remains.</p>
+              </div>
+            </div>
           </div>
-
-          <div class="en">
-            <p>This recording captures a lighter moment — the way he spoke, with humour and ease.</p>
-            <p>It was sent in a Facebook Messenger message.</p>
-          </div>
-        </div>
-
-        <div class="audio-player" data-player>
-          <button class="play-btn" type="button">▶</button>
-          <input class="progress" type="range" min="0" max="100" value="0" step="0.1" />
-          <span class="time">0:00</span>
-          <audio preload="metadata" src="entre-risos.m4a"></audio>
-        </div>
-      </div>
-    </article>
-
-  </div>
-</section>
+        </article>
+      </section>
     </main>
   </div>
 
