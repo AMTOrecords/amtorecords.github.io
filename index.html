@@ -56,6 +56,9 @@
       --container: 1180px;
       --bottom-ui: calc(92px + env(safe-area-inset-bottom));
       --focus: rgba(255,255,255,0.96);
+      --section-tone-1: rgba(255,255,255,0.012);
+      --section-tone-2: rgba(255,255,255,0.018);
+      --ambient: rgba(255,255,255,0.06);
     }
 
     * {
@@ -77,6 +80,31 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+      opacity: 0;
+      transition: opacity 420ms ease;
+    }
+
+    body.page-ready {
+      opacity: 1;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(255,255,255,0.02), transparent 34%),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(255,255,255,0.012) 22%,
+          transparent 44%,
+          rgba(255,255,255,0.012) 68%,
+          transparent 100%
+        );
+      opacity: 0.85;
     }
 
     img, video {
@@ -144,13 +172,14 @@
       pointer-events: none;
       background:
         radial-gradient(circle at center, rgba(255,255,255,0.02), transparent 48%),
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.018), transparent 28%),
         linear-gradient(
           to bottom,
-          rgba(0,0,0,0.14) 0%,
-          rgba(0,0,0,0.10) 22%,
-          rgba(0,0,0,0.14) 54%,
-          rgba(0,0,0,0.28) 80%,
-          rgba(0,0,0,0.44) 100%
+          rgba(0,0,0,0.12) 0%,
+          rgba(0,0,0,0.10) 18%,
+          rgba(0,0,0,0.14) 44%,
+          rgba(0,0,0,0.26) 74%,
+          rgba(0,0,0,0.48) 100%
         );
     }
 
@@ -160,12 +189,12 @@
       bottom: 84px;
       transform: translateX(-50%);
       z-index: 45;
-      color: rgba(255,255,255,0.46);
+      color: rgba(255,255,255,0.44);
       font-size: 10px;
       letter-spacing: 1.7px;
       text-transform: uppercase;
       pointer-events: none;
-      animation: pulse 2.4s ease-in-out infinite;
+      animation: pulse 2.6s ease-in-out infinite;
       transition: opacity 0.24s ease;
     }
 
@@ -176,7 +205,7 @@
     .social-wrap {
       position: fixed;
       left: 50%;
-      bottom: max(18px, env(safe-area-inset-bottom));
+      bottom: max(20px, env(safe-area-inset-bottom));
       transform: translateX(-50%);
       z-index: 46;
       max-width: calc(100vw - 24px);
@@ -189,9 +218,11 @@
       gap: 17px;
       padding: 11px 14px;
       border-radius: 999px;
-      background: var(--glass);
+      background: rgba(0,0,0,0.38);
       border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.03);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
@@ -210,8 +241,8 @@
     .socials a:active,
     .socials a:focus-visible {
       color: #fff;
-      transform: translateY(-1px) scale(1.06);
-      filter: drop-shadow(0 0 8px rgba(255,255,255,0.14));
+      transform: translateY(-1px) scale(1.04);
+      filter: drop-shadow(0 0 7px rgba(255,255,255,0.12));
       outline: none;
     }
 
@@ -238,10 +269,22 @@
     }
 
     .section {
-      margin-bottom: clamp(80px, 9vw, 108px);
+      position: relative;
+      margin-bottom: clamp(82px, 9vw, 112px);
       opacity: 0;
       transform: translateY(18px);
       transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: -18px -10px;
+      border-radius: 40px;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(180deg, var(--section-tone-1), var(--section-tone-2));
+      opacity: 0.5;
     }
 
     .section.show {
@@ -283,7 +326,7 @@
 
     .eyebrow {
       margin: 0 0 10px;
-      color: rgba(255,255,255,0.54);
+      color: rgba(255,255,255,0.52);
       font-family: "Inter", sans-serif;
       font-size: 11px;
       font-weight: 500;
@@ -291,20 +334,29 @@
       text-transform: uppercase;
     }
 
-    .feature-shell {
+    .feature-shell,
+    .origin-cinematic,
+    .release-card {
       position: relative;
-      border-radius: 34px;
-      overflow: hidden;
     }
 
-    .feature-shell::before {
+    .feature-shell::before,
+    .origin-cinematic::before,
+    .release-card::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: url('love-you-bye-cover.jpg') center/cover no-repeat;
-      filter: blur(50px) brightness(0.22);
-      transform: scale(1.12);
-      opacity: 0.82;
+      inset: -10px;
+      z-index: -1;
+      border-radius: 38px;
+      pointer-events: none;
+      background: radial-gradient(circle at center, var(--ambient), transparent 68%);
+      opacity: 0.42;
+      filter: blur(18px);
+    }
+
+    .feature-shell {
+      border-radius: 34px;
+      overflow: hidden;
     }
 
     .feature-shell::after {
@@ -314,6 +366,34 @@
       background:
         linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.32)),
         radial-gradient(circle at 20% 20%, rgba(255,255,255,0.04), transparent 26%);
+      pointer-events: none;
+    }
+
+    .feature-shell > .feature-bg {
+      display: none;
+    }
+
+    .feature-shell {
+      background: none;
+    }
+
+    .feature-shell .feature-card {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-shell::marker {
+      display: none;
+    }
+
+    .feature-shell:before {
+      background: url('love-you-bye-cover.jpg') center/cover no-repeat;
+      filter: blur(50px) brightness(0.22);
+      transform: scale(1.12);
+      opacity: 0.82;
+      inset: 0;
+      z-index: 0;
+      border-radius: 34px;
     }
 
     .feature-card,
@@ -334,6 +414,24 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.042), rgba(255,255,255,0.018));
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+    }
+
+    .feature-card::after,
+    .origin-cinematic::after,
+    .release-card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.12),
+        transparent
+      );
+      pointer-events: none;
     }
 
     .feature-image {
@@ -424,7 +522,9 @@
       background: #fff;
       color: #000;
       border-color: #fff;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+      box-shadow:
+        0 10px 28px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.8);
     }
 
     .button.primary:hover,
@@ -442,14 +542,15 @@
     }
 
     .origin-cinematic::before {
-      content: "";
-      position: absolute;
-      inset: 0;
       background:
-        radial-gradient(circle at 18% 28%, rgba(255,255,255,0.08), transparent 30%),
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.10), transparent 28%),
         radial-gradient(circle at 82% 72%, rgba(255,255,255,0.05), transparent 24%),
         linear-gradient(135deg, rgba(255,255,255,0.03), transparent 45%);
-      pointer-events: none;
+      opacity: 1;
+      inset: 0;
+      filter: none;
+      z-index: 0;
+      border-radius: 34px;
     }
 
     .origin-cinematic::after {
@@ -462,6 +563,7 @@
           rgba(0,0,0,0.60) 42%,
           rgba(0,0,0,0.30) 100%);
       pointer-events: none;
+      z-index: 0;
     }
 
     .origin-cinematic-inner {
@@ -775,6 +877,10 @@
         scroll-behavior: auto;
       }
 
+      body {
+        transition: none !important;
+      }
+
       *,
       *::before,
       *::after {
@@ -792,8 +898,8 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.45; }
-      50% { opacity: 0.76; }
+      0%, 100% { opacity: 0.42; }
+      50% { opacity: 0.72; }
     }
   </style>
 </head>
@@ -837,6 +943,26 @@
   <header class="hero" aria-label="AMTO Records hero"></header>
 
   <main class="content" id="main-content">
+
+    <section class="section" id="origin-preview" aria-labelledby="origin-heading">
+      <div class="origin-cinematic">
+        <div class="origin-cinematic-inner">
+          <p class="eyebrow">A origem</p>
+
+          <h2 class="origin-title" id="origin-heading">A origem de AMTO Records</h2>
+
+          <p class="origin-copy origin-line delay-1">AMTO nasce das iniciais do nome do meu pai.</p>
+
+          <p class="origin-copy origin-line delay-2">Mais do que um nome, tornou-se uma forma de manter viva a presença dele — não só na memória, mas também na música e em tudo aquilo que é construído a partir daqui.</p>
+
+          <p class="origin-copy origin-line delay-3">Esta editora foi criada como um lugar onde a memória, o significado e o legado podem continuar a existir com intenção, respeito e verdade.</p>
+
+          <div class="origin-actions origin-line delay-4">
+            <a href="origin.html" class="button primary" data-track-category="page" data-track-label="origin_page">Ler a origem</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="section" id="released-section" aria-labelledby="released-heading">
       <div class="section-head">
@@ -902,26 +1028,6 @@
       </div>
     </section>
 
-    <section class="section" id="origin-preview" aria-labelledby="origin-heading">
-      <div class="origin-cinematic">
-        <div class="origin-cinematic-inner">
-          <p class="eyebrow">A origem</p>
-
-          <h2 class="origin-title" id="origin-heading">A origem de AMTO Records</h2>
-
-          <p class="origin-copy origin-line delay-1">AMTO nasce das iniciais do nome do meu pai.</p>
-
-          <p class="origin-copy origin-line delay-2">Mais do que um nome, tornou-se uma forma de manter viva a presença dele — não só na memória, mas também na música e em tudo aquilo que é construído a partir daqui.</p>
-
-          <p class="origin-copy origin-line delay-3">Esta editora foi criada como um lugar onde a memória, o significado e o legado podem continuar a existir com intenção, respeito e verdade.</p>
-
-          <div class="origin-actions origin-line delay-4">
-            <a href="origin.html" class="button primary" data-track-category="page" data-track-label="origin_page">Ler a origem</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="coming-section" aria-labelledby="coming-heading">
       <div class="section-head">
         <h2 id="coming-heading">Ainda por dizer</h2>
@@ -929,26 +1035,6 @@
       </div>
 
       <div class="release-grid">
-        <article class="release-card">
-          <div class="release-media">
-            <div class="release-art">
-              <img
-                src="ficamos-por-ir.jpg"
-                alt="Capa de Ficámos por Ir"
-                loading="lazy"
-                decoding="async"
-                width="1200"
-                height="1200"
-              />
-            </div>
-          </div>
-          <div class="release-info">
-            <p class="eyebrow">Por lançar</p>
-            <h3>Ficámos por Ir</h3>
-            <p>Uma canção sobre promessas que ficaram por cumprir, lugares que não chegaram a ser partilhados e tudo aquilo que continua a viver na ligação a quem partiu.</p>
-          </div>
-        </article>
-
         <article class="release-card">
           <div class="release-media">
             <div class="release-art">
@@ -966,6 +1052,26 @@
             <p class="eyebrow">Por lançar</p>
             <h3>No Teu Dia</h3>
             <p>Uma reflexão feita a partir da ausência, do aniversário, da família e da forma como certas presenças continuam a marcar a vida mesmo depois do silêncio.</p>
+          </div>
+        </article>
+
+        <article class="release-card">
+          <div class="release-media">
+            <div class="release-art">
+              <img
+                src="ficamos-por-ir.jpg"
+                alt="Capa de Ficámos por Ir"
+                loading="lazy"
+                decoding="async"
+                width="1200"
+                height="1200"
+              />
+            </div>
+          </div>
+          <div class="release-info">
+            <p class="eyebrow">Por lançar</p>
+            <h3>Ficámos por Ir</h3>
+            <p>Uma canção sobre promessas que ficaram por cumprir, lugares que não chegaram a ser partilhados e tudo aquilo que continua a viver na ligação a quem partiu.</p>
           </div>
         </article>
       </div>
@@ -1120,14 +1226,22 @@
     }
 
     window.addEventListener('scroll', updateUI, { passive: true });
+
     window.addEventListener('load', () => {
       updateUI();
       tryStartHeroVideo();
+      requestAnimationFrame(() => {
+        document.body.classList.add('page-ready');
+      });
     });
 
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) tryStartHeroVideo();
     });
+
+    if (document.readyState === 'complete') {
+      document.body.classList.add('page-ready');
+    }
   </script>
 </body>
 </html>
