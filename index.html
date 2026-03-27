@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>AMTO Records | Música, memória e legado</title>
-  <meta name="description" content="AMTO Records é uma editora criada para dar casa à música, à memória e ao legado. Descobre Love You Bye e os próximos lançamentos." />
+  <meta name="description" content="AMTO Records é uma editora criada para dar casa à música, à memória e ao legado. Descobre Love You Bye e os lançamentos da editora." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#000000" />
   <meta name="format-detection" content="telephone=no" />
@@ -357,6 +357,7 @@
     .feature-shell {
       border-radius: 34px;
       overflow: hidden;
+      background: none;
     }
 
     .feature-shell::after {
@@ -367,14 +368,6 @@
         linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.32)),
         radial-gradient(circle at 20% 20%, rgba(255,255,255,0.04), transparent 26%);
       pointer-events: none;
-    }
-
-    .feature-shell > .feature-bg {
-      display: none;
-    }
-
-    .feature-shell {
-      background: none;
     }
 
     .feature-shell .feature-card {
@@ -486,7 +479,20 @@
       max-width: 58ch;
     }
 
-    .button-row {
+    .feature-topline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 0 0 14px;
+    }
+
+    .feature-topline .eyebrow {
+      margin: 0;
+    }
+
+    .button-row,
+    .release-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
@@ -503,7 +509,7 @@
       background: rgba(255,255,255,0.05);
       color: #fff;
       text-align: center;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
       font-size: 14px;
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -530,6 +536,13 @@
     .button.primary:hover,
     .button.primary:active {
       background: rgba(255,255,255,0.92);
+    }
+
+    .button.disabled,
+    .button[aria-disabled="true"] {
+      opacity: 0.72;
+      pointer-events: none;
+      cursor: default;
     }
 
     .origin-cinematic {
@@ -680,6 +693,51 @@
       padding: 0 22px 24px;
     }
 
+    .release-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.86);
+      white-space: nowrap;
+    }
+
+    .status-badge.out {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.20);
+      color: #fff;
+    }
+
+    .status-badge.soon {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .release-date {
+      margin: 0;
+      color: rgba(255,255,255,0.62);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
     .release-info h3 {
       margin: 0 0 10px;
       font-size: 26px;
@@ -802,7 +860,8 @@
         padding: 0 20px 24px;
       }
 
-      .button-row {
+      .button-row,
+      .release-actions {
         flex-direction: column;
       }
 
@@ -948,15 +1007,10 @@
       <div class="origin-cinematic">
         <div class="origin-cinematic-inner">
           <p class="eyebrow">A origem</p>
-
           <h2 class="origin-title" id="origin-heading">A origem de AMTO Records</h2>
-
           <p class="origin-copy origin-line delay-1">AMTO nasce das iniciais do nome do meu pai.</p>
-
           <p class="origin-copy origin-line delay-2">Mais do que um nome, tornou-se uma forma de manter viva a presença dele — não só na memória, mas também na música e em tudo aquilo que é construído a partir daqui.</p>
-
           <p class="origin-copy origin-line delay-3">Esta editora foi criada como um lugar onde a memória, o significado e o legado podem continuar a existir com intenção, respeito e verdade.</p>
-
           <div class="origin-actions origin-line delay-4">
             <a href="origin.html" class="button primary" data-track-category="page" data-track-label="origin_page">Ler a origem</a>
           </div>
@@ -964,13 +1018,21 @@
       </div>
     </section>
 
-    <section class="section" id="released-section" aria-labelledby="released-heading">
+    <section class="section" id="releases-section" aria-labelledby="releases-heading">
       <div class="section-head">
-        <h1 id="released-heading">Para quem quiser ouvir</h1>
-        <p>O primeiro lançamento desta página. Tratado com cuidado, sem pressa, e com respeito pela história que o inspirou.</p>
+        <h1 id="releases-heading">Lançamentos</h1>
+        <p>Um catálogo construído com memória, presença e cuidado. Love You Bye surge primeiro, seguido pelos restantes lançamentos da editora.</p>
       </div>
 
-      <div class="feature-shell">
+      <div
+        class="feature-shell release-item"
+        data-release-date="2026-02-27"
+        data-live-url="love-you-bye.html"
+        data-out-label="Já disponível"
+        data-soon-label="Brevemente"
+        data-out-button="Ouvir"
+        data-soon-button="Brevemente"
+      >
         <article class="feature-card">
           <div class="feature-image">
             <div class="feature-art">
@@ -987,23 +1049,40 @@
           </div>
 
           <div class="feature-info">
-            <p class="eyebrow">Lançamento em destaque</p>
+            <div class="feature-topline">
+              <p class="eyebrow feature-status-label">Lançamento em destaque</p>
+              <span class="status-badge feature-status-badge">Já disponível</span>
+            </div>
+
             <h2>Love You Bye</h2>
             <p>Um espaço feito de memória, presença e tudo aquilo que permanece — tratado com cuidado, sem pressa, e com respeito pela história que o inspirou.</p>
 
             <div class="button-row">
-              <a class="button primary" href="love-you-bye.html" data-track-category="release" data-track-label="love_you_bye_page">Ouvir</a>
+              <a class="button primary feature-release-button" href="love-you-bye.html" data-track-category="release" data-track-label="love_you_bye_page">Ouvir</a>
             </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="section">
-      <div class="feature-shell">
-        <article class="feature-card">
-          <div class="feature-image">
-            <div class="feature-art">
+    <section class="section" aria-labelledby="more-releases-heading">
+      <div class="section-head">
+        <h2 id="more-releases-heading">Mais lançamentos</h2>
+        <p>Todos os lançamentos seguem a mesma linguagem visual e o mesmo cuidado, sem separar o que já saiu do que ainda está por chegar.</p>
+      </div>
+
+      <div class="release-grid">
+        <article
+          class="release-card release-item"
+          data-release-date="2026-03-21"
+          data-live-url="79-dias.html"
+          data-out-label="Já disponível"
+          data-soon-label="Brevemente"
+          data-out-button="Ouvir"
+          data-soon-button="Brevemente"
+        >
+          <div class="release-media">
+            <div class="release-art">
               <img
                 src="79-days.jpg"
                 alt="Capa de 79 Dias"
@@ -1014,28 +1093,28 @@
               />
             </div>
           </div>
-
-          <div class="feature-info">
-            <p class="eyebrow">Já disponível</p>
-            <h2>79 Dias</h2>
+          <div class="release-info">
+            <div class="release-topline">
+              <span class="status-badge release-status-badge">Já disponível</span>
+              <p class="release-date release-date-label">21 mar 2026</p>
+            </div>
+            <h3>79 Dias</h3>
             <p>Uma música sobre o tempo, a última conversa, aquilo que ficou preso na garganta e tudo o que permanece depois de uma perda que ainda parece irreal.</p>
-
-            <div class="button-row">
-              <a class="button primary" href="79-dias.html" data-track-category="release" data-track-label="79_dias_page">Ouvir</a>
+            <div class="release-actions">
+              <a class="button primary release-button" href="79-dias.html" data-track-category="release" data-track-label="79_dias_page">Ouvir</a>
             </div>
           </div>
         </article>
-      </div>
-    </section>
 
-    <section class="section" id="coming-section" aria-labelledby="coming-heading">
-      <div class="section-head">
-        <h2 id="coming-heading">Ainda por dizer</h2>
-        <p>Os próximos lançamentos seguem a mesma linha: memória, reflexão e ligação. Mostrados com a mesma linguagem visual e o mesmo cuidado.</p>
-      </div>
-
-      <div class="release-grid">
-        <article class="release-card">
+        <article
+          class="release-card release-item"
+          data-release-date="2026-03-30"
+          data-live-url="no-teu-dia.html"
+          data-out-label="Já disponível"
+          data-soon-label="Brevemente"
+          data-out-button="Ouvir"
+          data-soon-button="Brevemente"
+        >
           <div class="release-media">
             <div class="release-art">
               <img
@@ -1049,13 +1128,27 @@
             </div>
           </div>
           <div class="release-info">
-            <p class="eyebrow">Por lançar</p>
+            <div class="release-topline">
+              <span class="status-badge release-status-badge">Brevemente</span>
+              <p class="release-date release-date-label">30 mar 2026</p>
+            </div>
             <h3>No Teu Dia</h3>
             <p>Uma reflexão feita a partir da ausência, do aniversário, da família e da forma como certas presenças continuam a marcar a vida mesmo depois do silêncio.</p>
+            <div class="release-actions">
+              <a class="button release-button disabled" href="#" aria-disabled="true" tabindex="-1" data-track-category="release" data-track-label="no_teu_dia_page">Brevemente</a>
+            </div>
           </div>
         </article>
 
-        <article class="release-card">
+        <article
+          class="release-card release-item"
+          data-release-date="2026-06-21"
+          data-live-url="ficamos-por-ir.html"
+          data-out-label="Já disponível"
+          data-soon-label="Brevemente"
+          data-out-button="Ouvir"
+          data-soon-button="Brevemente"
+        >
           <div class="release-media">
             <div class="release-art">
               <img
@@ -1069,9 +1162,15 @@
             </div>
           </div>
           <div class="release-info">
-            <p class="eyebrow">Por lançar</p>
+            <div class="release-topline">
+              <span class="status-badge release-status-badge">Brevemente</span>
+              <p class="release-date release-date-label">21 jun 2026</p>
+            </div>
             <h3>Ficámos por Ir</h3>
             <p>Uma canção sobre promessas que ficaram por cumprir, lugares que não chegaram a ser partilhados e tudo aquilo que continua a viver na ligação a quem partiu.</p>
+            <div class="release-actions">
+              <a class="button release-button disabled" href="#" aria-disabled="true" tabindex="-1" data-track-category="release" data-track-label="ficamos_por_ir_page">Brevemente</a>
+            </div>
           </div>
         </article>
       </div>
@@ -1174,11 +1273,73 @@
       }
     }
 
+    function formatPortugueseDate(dateString) {
+      const date = new Date(dateString + 'T12:00:00');
+      if (Number.isNaN(date.getTime())) return '';
+
+      return new Intl.DateTimeFormat('pt-PT', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      }).format(date);
+    }
+
+    function startOfToday() {
+      const now = new Date();
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+
+    function applyReleaseStatuses() {
+      const items = document.querySelectorAll('.release-item');
+      const today = startOfToday();
+
+      items.forEach(item => {
+        const releaseDateValue = item.getAttribute('data-release-date');
+        const liveUrl = item.getAttribute('data-live-url') || '#';
+        const outLabel = item.getAttribute('data-out-label') || 'Já disponível';
+        const soonLabel = item.getAttribute('data-soon-label') || 'Brevemente';
+        const outButton = item.getAttribute('data-out-button') || 'Ouvir';
+        const soonButton = item.getAttribute('data-soon-button') || 'Brevemente';
+
+        const releaseDate = releaseDateValue ? new Date(releaseDateValue + 'T12:00:00') : null;
+        const isOut = releaseDate instanceof Date && !Number.isNaN(releaseDate.getTime()) && releaseDate <= today;
+
+        const statusBadge = item.querySelector('.release-status-badge, .feature-status-badge');
+        const dateLabel = item.querySelector('.release-date-label');
+        const button = item.querySelector('.release-button, .feature-release-button');
+        const eyebrow = item.querySelector('.feature-status-label');
+
+        if (statusBadge) {
+          statusBadge.textContent = isOut ? outLabel : soonLabel;
+          statusBadge.classList.remove('out', 'soon');
+          statusBadge.classList.add(isOut ? 'out' : 'soon');
+        }
+
+        if (dateLabel && releaseDateValue) {
+          dateLabel.textContent = formatPortugueseDate(releaseDateValue);
+        }
+
+        if (button) {
+          button.textContent = isOut ? outButton : soonButton;
+          button.setAttribute('href', isOut ? liveUrl : '#');
+          button.classList.toggle('primary', isOut);
+          button.classList.toggle('disabled', !isOut);
+          button.setAttribute('aria-disabled', isOut ? 'false' : 'true');
+          button.tabIndex = isOut ? 0 : -1;
+        }
+
+        if (eyebrow) {
+          eyebrow.textContent = isOut ? 'Lançamento em destaque' : 'Próximo lançamento em destaque';
+        }
+      });
+    }
+
     document.querySelectorAll('[data-track-category][data-track-label]').forEach(el => {
       el.addEventListener('click', trackClick);
     });
 
     setupConsent();
+    applyReleaseStatuses();
 
     if (!prefersReducedMotion && 'IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
