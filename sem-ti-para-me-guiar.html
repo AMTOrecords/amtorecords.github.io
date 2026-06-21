@@ -1,1 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Sem Ti Para Me Guiar — AMTO Records</title>
+  <meta name="description" content="Sem Ti Para Me Guiar — uma homenagem íntima ao Dia do Pai, feita de saudade, memória e legado, editada pela AMTO Records." />
+  <meta name="theme-color" content="#000000" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://amtorecords.com/sem-ti-para-me-guiar.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AMTO Records" />
+  <meta property="og:title" content="Sem Ti Para Me Guiar — AMTO Records" />
+  <meta property="og:description" content="Uma homenagem íntima ao Dia do Pai, feita de saudade, memória e legado." />
+  <meta property="og:image" content="https://amtorecords.com/sem-ti-para-me-guiar.png" />
+  <meta property="og:url" content="https://amtorecords.com/sem-ti-para-me-guiar.html" />
+  <meta property="og:locale" content="pt_PT" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sem Ti Para Me Guiar — AMTO Records" />
+  <meta name="twitter:description" content="Uma homenagem íntima ao Dia do Pai, feita de saudade, memória e legado." />
+  <meta name="twitter:image" content="https://amtorecords.com/sem-ti-para-me-guiar.png" />
+
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.78);
+      --soft: rgba(255,255,255,0.58);
+      --border: rgba(255,255,255,0.12);
+      --border-strong: rgba(255,255,255,0.18);
+      --bg: #050505;
+      --panel: rgba(255,255,255,0.055);
+      --panel-strong: rgba(255,255,255,0.09);
+      --gold: #d8b46a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(216,180,106,0.16), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.08), transparent 34%),
+        #050505;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    main {
+      padding: 54px 0 70px;
+    }
+
+    .release-hero {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 58px;
+    }
+
+    .cover-wrap {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.36);
+    }
+
+    .cover {
+      display: block;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.76rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      line-height: 0.94;
+      margin: 0 0 22px;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 680px;
+      margin: 0 0 26px;
+    }
+
+    .brand-line {
+      color: var(--soft);
+      font-size: 0.96rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.94rem;
+    }
+
+    .button.primary {
+      background: var(--text);
+      color: #000000;
+      border-color: var(--text);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.14);
+    }
+
+    .button.primary:hover {
+      background: rgba(255,255,255,0.88);
+    }
+
+    section {
+      margin-top: 38px;
+      padding: 34px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+    }
+
+    h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      margin: 0 0 18px;
+      letter-spacing: -0.025em;
+    }
+
+    p {
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .tracklist {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: tracks;
+    }
+
+    .tracklist li {
+      counter-increment: tracks;
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .tracklist li:last-child {
+      border-bottom: none;
+    }
+
+    .tracklist li::before {
+      content: counter(tracks, decimal-leading-zero);
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      min-width: 32px;
+    }
+
+    .note {
+      color: var(--soft);
+      font-size: 0.94rem;
+    }
+
+    footer {
+      padding: 34px 0 46px;
+      border-top: 1px solid var(--border);
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    footer strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    @media (max-width: 820px) {
+      .release-hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .cover-wrap {
+        max-width: 430px;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      section {
+        padding: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="page nav">
+      <a class="brand" href="/">AMTO Records</a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="/">Início</a>
+        <a href="/origin.html">Origem</a>
+        <a href="/#releases">Lançamentos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <article class="release-hero">
+      <div class="cover-wrap">
+        <img
+          class="cover"
+          src="sem-ti-para-me-guiar.png"
+          alt="Capa de Sem Ti Para Me Guiar"
+        />
+      </div>
+
+      <div>
+        <div class="eyebrow">Lançamento · AMTO Records</div>
+
+        <h1>Sem Ti Para Me Guiar</h1>
+
+        <p class="subtitle">
+          Uma homenagem íntima criada para o Dia do Pai, sobre a ausência, a saudade
+          e a forma como um pai continua a guiar-nos mesmo depois de já não estar
+          fisicamente presente.
+        </p>
+
+        <p class="brand-line">
+          Construída sobre música, memória e legado.<br />
+          Built on music, memory and legacy.
+        </p>
+
+        <div class="buttons">
+          <a
+            class="button primary"
+            href="https://open.spotify.com/album/6PJKlbtYUZLbDbbjQo008J?si=6zeEQ4hbSoO3AVvxOwomcA"
+            target="_blank"
+            rel="noopener"
+          >
+            Ouvir no Spotify
+          </a>
+
+          <a
+            class="button"
+            href="https://music.youtube.com/playlist?list=OLAK5uy_mdV04OYEMY8cWVdnH-lYqEm44ZG3uZp1s&si=C2xc8PmTdsW-CW77"
+            target="_blank"
+            rel="noopener"
+          >
+            Ouvir no YouTube Music
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <section>
+      <h2>Sobre este lançamento</h2>
+
+      <p>
+        Este álbum nasce para o Dia do Pai como uma homenagem íntima ao meu pai
+        e a tudo o que continua vivo depois da sua partida.
+      </p>
+
+      <p>
+        Cada canção guarda uma parte diferente da ausência: as conversas que já não
+        acontecem, os lugares que ficaram por visitar, os conselhos que continuam
+        a guiar-me, as memórias pequenas que hoje têm o peso de uma vida inteira.
+      </p>
+
+      <p>
+        É um álbum sobre saudade, amor, perda e presença — sobre a forma como um pai
+        continua connosco mesmo quando já não está fisicamente aqui.
+      </p>
+
+      <p>
+        Mais do que uma coleção de músicas, este projeto é uma carta aberta. Um lugar
+        onde a dor se transforma em memória, onde a voz tenta chegar onde as palavras
+        já não chegam, e onde cada canção procura dizer aquilo que ficou por dizer.
+      </p>
+    </section>
+
+    <section>
+      <h2>Faixas</h2>
+
+      <ol class="tracklist">
+        <li>O Primeiro Dia do Pai Sem Ti</li>
+        <li>Hoje Não Te Posso Ligar</li>
+        <li>A Tua Cara de Orgulho</li>
+        <li>5 Segundos</li>
+        <li>Passaste Por Mim</li>
+        <li>Às Vezes Esqueço</li>
+        <li>Guardei o Teu Lugar</li>
+        <li>Pai, Fiz Isto Por Ti</li>
+        <li>Love You Bye</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Nota de produção</h2>
+
+      <p class="note">
+        Este projeto foi desenvolvido com recurso a ferramentas de inteligência
+        artificial generativa, com direção criativa, conceito, letras e curadoria
+        emocional de AMTO Records.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page">
+      <strong>AMTO Records</strong><br />
+      Construída sobre música, memória e legado.<br />
+      Built on music, memory and legacy.
+    </div>
+  </footer>
+</body>
+</html>
